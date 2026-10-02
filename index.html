@@ -1,0 +1,5596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congress of TheWay Town</title>
+
+<style>
+:root{
+  --bg:#07090d;
+  --panel:#0d1118;
+  --panel2:#111720;
+  --line:#202936;
+  --gold:#d7aa4a;
+  --gold2:#f1cc72;
+  --text:#edf1f7;
+  --muted:#8993a3;
+  --green:#35d07f;
+  --red:#ff5d68;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LOGIN */
+
+#loginScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(215,170,74,.13),
+      transparent 35%
+    ),
+    #07090d;
+}
+
+.login-card{
+  width:min(430px,100%);
+  background:rgba(13,17,24,.96);
+  border:1px solid #2a313d;
+  border-radius:18px;
+  padding:32px;
+  box-shadow:0 25px 80px #0008;
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.brand-mark{
+  width:64px;
+  height:64px;
+  border:1px solid var(--gold);
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 14px;
+  color:var(--gold);
+  font-size:22px;
+  font-weight:800;
+}
+
+.brand h1{
+  font-size:23px;
+  margin:0;
+}
+
+.brand p{
+  color:var(--muted);
+  margin:8px 0 0;
+  font-size:13px;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  color:#b9c1cd;
+  font-size:12px;
+  margin:0 0 7px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  background:#090d13;
+  color:var(--text);
+  border:1px solid #27303d;
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--gold);
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.primary{
+  background:var(--gold);
+  color:#111;
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:800;
+}
+
+.primary:hover{
+  background:var(--gold2);
+}
+
+.secondary,
+.danger,
+.ghost{
+  border-radius:10px;
+  padding:10px 14px;
+  border:1px solid #2a3441;
+  background:#121821;
+  color:var(--text);
+}
+
+.danger{
+  border-color:#65313a;
+  color:#ff9299;
+}
+
+.ghost{
+  background:transparent;
+}
+
+.login-btn{
+  width:100%;
+  margin-top:5px;
+}
+
+.error{
+  color:#ff9299;
+  background:#30171b;
+  border:1px solid #65313a;
+  padding:10px;
+  border-radius:9px;
+  margin:0 0 15px;
+  font-size:13px;
+}
+
+/* APP */
+
+#app{
+  min-height:100vh;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:255px;
+  background:#0a0e14;
+  border-right:1px solid var(--line);
+  padding:20px 14px;
+  z-index:20;
+}
+
+.side-brand{
+  padding:5px 10px 20px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:15px;
+}
+
+.side-brand strong{
+  display:block;
+  font-size:16px;
+}
+
+.side-brand span{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.nav{
+  display:grid;
+  gap:6px;
+}
+
+.nav button{
+  width:100%;
+  text-align:left;
+  background:transparent;
+  border:1px solid transparent;
+  color:#aeb7c5;
+  padding:11px 12px;
+  border-radius:9px;
+}
+
+.nav button:hover,
+.nav button.active{
+  background:#151b24;
+  color:var(--gold2);
+  border-color:#282f3a;
+}
+
+.sidebar-bottom{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:18px;
+  border-top:1px solid var(--line);
+  padding-top:15px;
+}
+
+.user-mini{
+  font-size:12px;
+  color:#cbd2dc;
+  margin-bottom:10px;
+}
+
+.user-mini span{
+  display:block;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.main{
+  margin-left:255px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:68px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  background:#090d13cc;
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mobile-btn{
+  display:none;
+  background:transparent;
+  border:0;
+  color:#ddd;
+  font-size:21px;
+}
+
+.status{
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#777;
+}
+
+.dot.on{
+  background:var(--green);
+  box-shadow:0 0 10px #35d07f;
+}
+
+.top-user{
+  text-align:right;
+}
+
+.top-user strong{
+  font-size:12px;
+}
+
+.top-user span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.content{
+  padding:25px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.page-title{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:22px;
+}
+
+.page-title h2{
+  margin:0;
+  font-size:22px;
+}
+
+.page-title p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+/* DASHBOARD */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:18px;
+}
+
+.card .label{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.card .value{
+  font-size:26px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:18px;
+}
+
+.panel h3{
+  margin:0 0 14px;
+  font-size:15px;
+}
+
+.list{
+  display:grid;
+  gap:9px;
+}
+
+.list-item{
+  border:1px solid var(--line);
+  background:#0b1016;
+  border-radius:10px;
+  padding:12px;
+}
+
+.list-item strong{
+  font-size:13px;
+}
+
+.list-item small{
+  display:block;
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.empty{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+th,
+td{
+  padding:12px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:12px;
+}
+
+th{
+  color:#aab3c0;
+  background:#111720;
+}
+
+td{
+  color:#dce2ea;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+.badge{
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#171e28;
+  border:1px solid #2b3542;
+  color:#cdd4df;
+  font-size:10px;
+}
+
+.badge.gold{
+  color:var(--gold2);
+  border-color:#624e27;
+  background:#211b10;
+}
+
+/* SECTORS */
+
+.sectors{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.sector{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel);
+  min-height:120px;
+}
+
+.sector b{
+  display:block;
+  margin-bottom:7px;
+}
+
+.sector span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* CHAT */
+
+.chat{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  height:600px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+  background:var(--panel);
+}
+
+.contacts{
+  border-right:1px solid var(--line);
+  padding:12px;
+  overflow:auto;
+}
+
+.contact{
+  padding:10px;
+  border-radius:9px;
+  margin-bottom:5px;
+  border:1px solid transparent;
+}
+
+.contact.active,
+.contact:hover{
+  background:#151b24;
+  border-color:#2b3440;
+}
+
+.contact strong{
+  font-size:12px;
+}
+
+.contact small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.chat-main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.messages{
+  flex:1;
+  overflow:auto;
+  padding:16px;
+}
+
+.msg{
+  max-width:75%;
+  margin-bottom:12px;
+  padding:10px 12px;
+  border-radius:11px;
+  background:#151c25;
+  border:1px solid #27303b;
+}
+
+.msg.me{
+  margin-left:auto;
+  background:#201b10;
+  border-color:#594821;
+}
+
+.msg .meta{
+  font-size:9px;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+
+.msg .body{
+  font-size:12px;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.chat-form{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+
+.chat-form input{
+  flex:1;
+}
+
+/* FILES */
+
+.file-list{
+  display:grid;
+  gap:10px;
+}
+
+.file-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.file-item small{
+  display:block;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* MODAL */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:#000a;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:100;
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(700px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0d1118;
+  border:1px solid #303947;
+  border-radius:14px;
+  box-shadow:0 30px 100px #000;
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+}
+
+.modal-head h3{
+  margin:0;
+  font-size:16px;
+}
+
+.close{
+  background:transparent;
+  border:0;
+  color:#aab3c0;
+  font-size:25px;
+  line-height:1;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.modal-foot{
+  padding:14px 18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#121821;
+  border:1px solid #303a48;
+  color:#e8edf4;
+  padding:12px 15px;
+  border-radius:10px;
+  z-index:200;
+  box-shadow:0 15px 40px #0008;
+  max-width:340px;
+  font-size:12px;
+}
+
+.toast.good{
+  border-color:#245c40;
+}
+
+.toast.bad{
+  border-color:#65313a;
+}
+
+.mobile-overlay{
+  display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:1050px){
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .sectors{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:800px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.2s;
+  }
+
+  .sidebar.open{
+    transform:none;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-btn{
+    display:block;
+  }
+
+  .mobile-overlay.show{
+    display:block;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:15;
+  }
+
+  .topbar{
+    padding:0 14px;
+  }
+
+  .content{
+    padding:16px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .sectors{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .chat{
+    grid-template-columns:145px 1fr;
+    height:calc(100vh - 140px);
+  }
+
+  .page-title{
+    flex-direction:column;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+}
+
+@media(max-width:520px){
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .sectors{
+    grid-template-columns:1fr;
+  }
+
+  .contacts{
+    display:none;
+  }
+
+  .chat{
+    display:block;
+  }
+
+  .chat-main{
+    height:100%;
+  }
+
+  .top-user{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section id="loginScreen">
+
+  <div class="login-card">
+
+    <div class="brand">
+
+      <div class="brand-mark">
+        CTW
+      </div>
+
+      <h1>
+        Congress of TheWay Town
+      </h1>
+
+      <p>
+        Central Government Management System
+      </p>
+
+    </div>
+
+    <form id="loginForm" autocomplete="off">
+
+      <div id="loginError" class="error hidden"></div>
+
+      <div class="field">
+
+        <label>
+          Username
+        </label>
+
+        <input
+          id="loginUsername"
+          type="text"
+          required
+          autocomplete="username"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Password
+        </label>
+
+        <input
+          id="loginPassword"
+          type="password"
+          required
+          autocomplete="current-password"
+        >
+
+      </div>
+
+      <button
+        id="loginButton"
+        class="primary login-btn"
+        type="submit"
+      >
+        Sign In
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<div id="app" class="hidden">
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="side-brand">
+
+      <strong>
+        Congress of TheWay Town
+      </strong>
+
+      <span>
+        Central Government Management System
+      </span>
+
+    </div>
+
+    <nav class="nav">
+
+      <button
+        class="active"
+        data-page="dashboard"
+      >
+        ▣ Dashboard
+      </button>
+
+      <button data-page="missions">
+        ◈ Missions
+      </button>
+
+      <button data-page="reports">
+        ▤ Reports
+      </button>
+
+      <button data-page="centralChat">
+        ◉ Central Chat
+      </button>
+
+      <button data-page="privateChat">
+        ◎ Private Communication
+      </button>
+
+      <button data-page="files">
+        ▧ Files
+      </button>
+
+      <button data-page="sectors">
+        ◇ Sectors
+      </button>
+
+      <button
+        id="accountsNav"
+        data-page="accounts"
+      >
+        ♙ Accounts
+      </button>
+
+      <button
+        id="systemNav"
+        data-page="system"
+      >
+        ⚙ System Control
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div
+        class="user-mini"
+        id="sideUser"
+      >
+        Not signed in
+
+        <span id="sideSector">
+          —
+        </span>
+
+      </div>
+
+      <button
+        class="danger"
+        style="width:100%"
+        id="logoutButton"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div
+    id="mobileOverlay"
+    class="mobile-overlay"
+  ></div>
+
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          id="mobileMenu"
+          class="mobile-btn"
+        >
+          ☰
+        </button>
+
+        <div class="status">
+
+          <span
+            id="firebaseDot"
+            class="dot"
+          ></span>
+
+          <span id="firebaseStatus">
+            Cloud connecting...
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="top-user">
+
+        <strong id="topUser">
+          —
+        </strong>
+
+        <span id="topSector">
+          —
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+
+      <!-- DASHBOARD -->
+
+      <section
+        id="page-dashboard"
+        class="page active"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Dashboard
+            </h2>
+
+            <p>
+              Central overview of TheWay Town government operations.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="cards">
+
+          <div class="card">
+
+            <div class="label">
+              ACCOUNTS
+            </div>
+
+            <div
+              id="statAccounts"
+              class="value"
+            >
+              5
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="label">
+              MISSIONS
+            </div>
+
+            <div
+              id="statMissions"
+              class="value"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="label">
+              REPORTS
+            </div>
+
+            <div
+              id="statReports"
+              class="value"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="label">
+              ONLINE OFFICIALS
+            </div>
+
+            <div
+              id="statOnline"
+              class="value"
+            >
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="grid">
+
+          <div class="panel">
+
+            <h3>
+              Current Account
+            </h3>
+
+            <div
+              id="currentAccountInfo"
+              class="list"
+            ></div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <h3>
+              System Status
+            </h3>
+
+            <div class="list">
+
+              <div class="list-item">
+
+                <strong>
+                  Cloud Database
+                </strong>
+
+                <small id="systemFirebaseStatus">
+                  Connecting...
+                </small>
+
+              </div>
+
+
+              <div class="list-item">
+
+                <strong>
+                  Session
+                </strong>
+
+                <small>
+                  Persistent until explicit Logout.
+                </small>
+
+              </div>
+
+
+              <div class="list-item">
+
+                <strong>
+                  Access Model
+                </strong>
+
+                <small>
+                  Congress Commander has full access. Agencies see their sector data.
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- MISSIONS -->
+
+      <section
+        id="page-missions"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Missions
+            </h2>
+
+            <p>
+              Operational missions visible according to sector access.
+            </p>
+
+          </div>
+
+          <div
+            class="actions"
+            id="missionActions"
+          ></div>
+
+        </div>
+
+
+        <div
+          id="missionsList"
+          class="list"
+        ></div>
+
+      </section>
+
+
+      <!-- REPORTS -->
+
+      <section
+        id="page-reports"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Reports
+            </h2>
+
+            <p>
+              Official reports and evidence records.
+            </p>
+
+          </div>
+
+          <button
+            class="primary"
+            id="newReportBtn"
+          >
+            + New Report
+          </button>
+
+        </div>
+
+
+        <div
+          id="reportsList"
+          class="list"
+        ></div>
+
+      </section>
+
+
+      <!-- CENTRAL CHAT -->
+
+      <section
+        id="page-centralChat"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Central Chat
+            </h2>
+
+            <p>
+              Shared communication between all fixed accounts.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="chat">
+
+          <div class="contacts">
+
+            <div class="contact active">
+
+              <strong>
+                Central Government
+              </strong>
+
+              <small>
+                All officials
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="chat-main">
+
+            <div
+              id="centralMessages"
+              class="messages"
+            ></div>
+
+
+            <form
+              id="centralChatForm"
+              class="chat-form"
+            >
+
+              <input
+                id="centralChatInput"
+                placeholder="Write a message..."
+                autocomplete="off"
+              >
+
+              <button
+                class="primary"
+                type="submit"
+              >
+                Send
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PRIVATE CHAT -->
+
+      <section
+        id="page-privateChat"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Private Communication
+            </h2>
+
+            <p>
+              Direct communication between two accounts.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="chat">
+
+          <div
+            id="privateContacts"
+            class="contacts"
+          ></div>
+
+
+          <div class="chat-main">
+
+            <div
+              id="privateMessages"
+              class="messages"
+            ></div>
+
+
+            <form
+              id="privateChatForm"
+              class="chat-form"
+            >
+
+              <input
+                id="privateChatInput"
+                placeholder="Write a private message..."
+                autocomplete="off"
+              >
+
+              <button
+                id="privateSendBtn"
+                class="primary"
+                type="submit"
+              >
+                Send
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FILES -->
+
+      <section
+        id="page-files"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Files
+            </h2>
+
+            <p>
+              Evidence and operational files stored in Firebase Storage.
+            </p>
+
+          </div>
+
+          <div class="actions">
+
+            <input
+              id="fileInput"
+              type="file"
+              style="display:none"
+            >
+
+            <button
+              class="primary"
+              id="uploadFileBtn"
+            >
+              + Upload File
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="filesList"
+          class="file-list"
+        ></div>
+
+      </section>
+
+
+      <!-- SECTORS -->
+
+      <section
+        id="page-sectors"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Sectors
+            </h2>
+
+            <p>
+              Registered government sectors of TheWay Town.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="sectors">
+
+          <div class="sector">
+
+            <b>
+              Congress
+            </b>
+
+            <span>
+              Central government command and full system administration.
+            </span>
+
+          </div>
+
+
+          <div class="sector">
+
+            <b>
+              CIA
+            </b>
+
+            <span>
+              Central Intelligence Agency.
+            </span>
+
+          </div>
+
+
+          <div class="sector">
+
+            <b>
+              FBI
+            </b>
+
+            <span>
+              Federal Bureau of Investigation.
+            </span>
+
+          </div>
+
+
+          <div class="sector">
+
+            <b>
+              LSPD
+            </b>
+
+            <span>
+              Los Santos Police Department.
+            </span>
+
+          </div>
+
+
+          <div class="sector">
+
+            <b>
+              DOJ
+            </b>
+
+            <span>
+              Department of Justice.
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ACCOUNTS -->
+
+      <section
+        id="page-accounts"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              Accounts
+            </h2>
+
+            <p>
+              Fixed system accounts. Passwords are never uploaded to Firestore.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Name
+                </th>
+
+                <th>
+                  Username
+                </th>
+
+                <th>
+                  Sector
+                </th>
+
+                <th>
+                  Role
+                </th>
+
+                <th>
+                  Jurisdiction
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="accountsTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- SYSTEM -->
+
+      <section
+        id="page-system"
+        class="page"
+      >
+
+        <div class="page-title">
+
+          <div>
+
+            <h2>
+              System Control
+            </h2>
+
+            <p>
+              Congress Commander control panel.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="grid">
+
+          <div class="panel">
+
+            <h3>
+              Cloud Database
+            </h3>
+
+            <div class="list">
+
+              <div class="list-item">
+
+                <strong>
+                  Firebase
+                </strong>
+
+                <small id="systemFirebaseStatus2">
+                  Connecting...
+                </small>
+
+              </div>
+
+
+              <div class="list-item">
+
+                <strong>
+                  Collections
+                </strong>
+
+                <small>
+                  missions · reports · centralChat · privateChats · files · presence · users
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <h3>
+              Session Security
+            </h3>
+
+            <div class="list">
+
+              <div class="list-item">
+
+                <strong>
+                  Login
+                </strong>
+
+                <small>
+                  Fixed accounts only. No registration page.
+                </small>
+
+              </div>
+
+
+              <div class="list-item">
+
+                <strong>
+                  Logout
+                </strong>
+
+                <small>
+                  Only explicit Logout clears the local session.
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+  id="modalOverlay"
+  class="modal-overlay"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="modalTitle">
+        Window
+      </h3>
+
+      <button
+        id="modalClose"
+        class="close"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="modalBody"
+      class="modal-body"
+    ></div>
+
+
+    <div
+      id="modalFooter"
+      class="modal-foot"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<div
+  id="toast"
+  class="toast hidden"
+></div>
+
+
+<script>
+
+/* =========================================================
+   FIXED ACCOUNTS
+========================================================= */
+
+const ACCOUNTS = [
+
+  {
+    id:"congress",
+    username:"congress",
+    password:"CTW#4829!",
+    name:"Congress Commander",
+    fullSector:"Congress of TheWay Town",
+    short:"CONGRESS",
+    jurisdiction:"TheWay Town",
+    role:"Congress Commander",
+    sector:"Congress",
+    fullAccess:true
+  },
+
+  {
+    id:"cia",
+    username:"cia",
+    password:"CIA#7316@",
+    name:"Central Intelligence Agency",
+    fullSector:"Central Intelligence Agency",
+    short:"CIA",
+    jurisdiction:"TheWay Town",
+    role:"Agency Director",
+    sector:"CIA",
+    fullAccess:false
+  },
+
+  {
+    id:"fbi",
+    username:"fbi",
+    password:"FBI#5942$",
+    name:"Federal Bureau of Investigation",
+    fullSector:"Federal Bureau of Investigation",
+    short:"FBI",
+    jurisdiction:"TheWay Town",
+    role:"Special Agent",
+    sector:"FBI",
+    fullAccess:false
+  },
+
+  {
+    id:"lspd",
+    username:"lspd",
+    password:"LSPD#8265!",
+    name:"Los Santos Police Department",
+    fullSector:"Los Santos Police Department",
+    short:"LSPD",
+    jurisdiction:"TheWay Town",
+    role:"Police Commander",
+    sector:"LSPD",
+    fullAccess:false
+  },
+
+  {
+    id:"doj",
+    username:"doj",
+    password:"DOJ#3174@",
+    name:"Department of Justice",
+    fullSector:"Department of Justice",
+    short:"DOJ",
+    jurisdiction:"TheWay Town",
+    role:"Justice Official",
+    sector:"DOJ",
+    fullAccess:false
+  }
+
+];
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyBK4EKEzR5bJJC46Fm58fxBX8baOOZD3CA",
+
+  authDomain:
+    "congress-system.firebaseapp.com",
+
+  projectId:
+    "congress-system",
+
+  storageBucket:
+    "congress-system.firebasestorage.app",
+
+  messagingSenderId:
+    "563738636945",
+
+  appId:
+    "1:563738636945:web:380cba764be03f63e58530"
+
+};
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let currentUser = null;
+
+let firebaseReady = false;
+
+let firebaseInitPromise = null;
+
+let db = null;
+
+let storage = null;
+
+let collection;
+let doc;
+let addDoc;
+let setDoc;
+let updateDoc;
+let deleteDoc;
+let query;
+let orderBy;
+let onSnapshot;
+let serverTimestamp;
+
+let ref;
+let uploadBytes;
+let getDownloadURL;
+
+let unsubscribe = [];
+
+let selectedPrivateUser = null;
+
+let heartbeatTimer = null;
+
+
+/* =========================================================
+   LOCAL CACHE
+========================================================= */
+
+const KEYS = {
+
+  missions:"ctw_local_missions",
+
+  reports:"ctw_local_reports",
+
+  central:"ctw_local_central",
+
+  private:"ctw_local_private",
+
+  files:"ctw_local_files"
+
+};
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function $(id){
+
+  return document.getElementById(id);
+
+}
+
+
+function saveSession(account){
+
+  localStorage.setItem(
+
+    "ctw_session",
+
+    JSON.stringify({
+
+      id:account.id,
+
+      username:account.username
+
+    })
+
+  );
+
+}
+
+
+function clearSession(){
+
+  localStorage.removeItem("ctw_session");
+
+}
+
+
+function getSavedAccount(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem("ctw_session")
+      );
+
+    if(
+      !saved ||
+      !saved.id ||
+      !saved.username
+    ){
+
+      return null;
+
+    }
+
+    return ACCOUNTS.find(
+
+      account =>
+
+        account.id === saved.id &&
+
+        account.username === saved.username
+
+    ) || null;
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Session error:",
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+function readLocal(key){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(key) || "[]"
+    );
+
+  }
+
+  catch{
+
+    return [];
+
+  }
+
+}
+
+
+function writeLocal(key,data){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(
+      /[&<>"']/g,
+      char => ({
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+
+      }[char])
+    );
+
+}
+
+
+function timeText(value){
+
+  if(!value){
+
+    return "Just now";
+
+  }
+
+  try{
+
+    const date =
+      value?.toDate
+        ? value.toDate()
+        : new Date(value);
+
+    if(isNaN(date)){
+
+      return "Just now";
+
+    }
+
+    return date.toLocaleString();
+
+  }
+
+  catch{
+
+    return "Just now";
+
+  }
+
+}
+
+
+function toast(message,type=""){
+
+  const element = $("toast");
+
+  element.textContent = message;
+
+  element.className =
+    "toast " + type;
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(
+
+      () => {
+
+        element.classList.add(
+          "hidden"
+        );
+
+      },
+
+      3500
+
+    );
+
+}
+
+
+function setCloudStatus(
+  connected,
+  text
+){
+
+  firebaseReady = connected;
+
+  $("firebaseStatus")
+    .textContent = text;
+
+  $("systemFirebaseStatus")
+    .textContent = text;
+
+  $("systemFirebaseStatus2")
+    .textContent = text;
+
+  $("firebaseDot")
+    .classList.toggle(
+      "on",
+      connected
+    );
+
+}
+
+
+function isCongress(){
+
+  return currentUser?.fullAccess === true;
+
+}
+
+
+function visibleSectorData(item){
+
+  if(isCongress()){
+
+    return true;
+
+  }
+
+  if(!item){
+
+    return false;
+
+  }
+
+  return [
+
+    item.sector,
+
+    item.toSector,
+
+    item.fromSector
+
+  ].some(
+
+    sector =>
+      sector &&
+      sector === currentUser.sector
+
+  );
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(
+  title,
+  body,
+  footer=""
+){
+
+  $("modalTitle").textContent =
+    title;
+
+  $("modalBody").innerHTML =
+    body;
+
+  $("modalFooter").innerHTML =
+    footer;
+
+  $("modalOverlay")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  $("modalOverlay")
+    .classList.remove("show");
+
+  $("modalBody").innerHTML = "";
+
+  $("modalFooter").innerHTML = "";
+
+}
+
+
+$("modalClose")
+  .addEventListener(
+    "click",
+    closeModal
+  );
+
+
+$("modalOverlay")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target ===
+        $("modalOverlay")
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document
+  .querySelectorAll(".nav button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".nav button")
+          .forEach(
+            x =>
+              x.classList.remove(
+                "active"
+              )
+          );
+
+        button.classList.add(
+          "active"
+        );
+
+        document
+          .querySelectorAll(".page")
+          .forEach(
+            page =>
+              page.classList.remove(
+                "active"
+              )
+          );
+
+        $("page-" + button.dataset.page)
+          .classList.add(
+            "active"
+          );
+
+        $("sidebar")
+          .classList.remove(
+            "open"
+          );
+
+        $("mobileOverlay")
+          .classList.remove(
+            "show"
+          );
+
+        renderCurrentPage();
+
+      }
+    );
+
+  });
+
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.add(
+          "open"
+        );
+
+      $("mobileOverlay")
+        .classList.add(
+          "show"
+        );
+
+    }
+  );
+
+
+$("mobileOverlay")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.remove(
+          "open"
+        );
+
+      $("mobileOverlay")
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   USER UI
+========================================================= */
+
+function setupUserUI(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+  $("topUser").textContent =
+    currentUser.name;
+
+  $("topSector").textContent =
+    currentUser.short +
+    " · " +
+    currentUser.role;
+
+  $("sideUser").innerHTML =
+
+    escapeHTML(
+      currentUser.name
+    ) +
+
+    "<span>" +
+
+    escapeHTML(
+      currentUser.role
+    ) +
+
+    "</span>";
+
+  $("sideSector").textContent =
+
+    currentUser.short +
+
+    " · " +
+
+    currentUser.jurisdiction;
+
+
+  $("accountsNav").style.display =
+    isCongress()
+      ? "block"
+      : "none";
+
+
+  $("systemNav").style.display =
+    isCongress()
+      ? "block"
+      : "none";
+
+
+  renderAccounts();
+
+  renderCurrentAccount();
+
+}
+
+
+function renderCurrentAccount(){
+
+  $("currentAccountInfo")
+    .innerHTML = `
+
+      <div class="list-item">
+
+        <strong>
+          ${escapeHTML(currentUser.name)}
+        </strong>
+
+        <small>
+          ${escapeHTML(currentUser.fullSector)}
+        </small>
+
+      </div>
+
+      <div class="list-item">
+
+        <strong>
+          Username
+        </strong>
+
+        <small>
+          ${escapeHTML(currentUser.username)}
+        </small>
+
+      </div>
+
+      <div class="list-item">
+
+        <strong>
+          Role
+        </strong>
+
+        <small>
+          ${escapeHTML(currentUser.role)}
+        </small>
+
+      </div>
+
+      <div class="list-item">
+
+        <strong>
+          Access
+        </strong>
+
+        <small>
+          ${
+            isCongress()
+              ? "Full system access"
+              : "Sector-restricted access"
+          }
+        </small>
+
+      </div>
+
+    `;
+
+}
+
+
+function renderAccounts(){
+
+  $("accountsTable")
+    .innerHTML =
+
+      ACCOUNTS.map(
+        account => `
+
+          <tr>
+
+            <td>
+              ${escapeHTML(account.name)}
+            </td>
+
+            <td>
+              ${escapeHTML(account.username)}
+            </td>
+
+            <td>
+
+              <span class="badge gold">
+
+                ${escapeHTML(account.short)}
+
+              </span>
+
+            </td>
+
+            <td>
+              ${escapeHTML(account.role)}
+            </td>
+
+            <td>
+              ${escapeHTML(account.jurisdiction)}
+            </td>
+
+          </tr>
+
+        `
+      ).join("");
+
+}
+
+
+function renderCurrentPage(){
+
+  const active =
+    document.querySelector(
+      ".page.active"
+    )?.id;
+
+  if(
+    active ===
+    "page-dashboard"
+  ){
+
+    renderDashboard();
+
+  }
+
+  if(
+    active ===
+    "page-missions"
+  ){
+
+    renderMissions();
+
+  }
+
+  if(
+    active ===
+    "page-reports"
+  ){
+
+    renderReports();
+
+  }
+
+  if(
+    active ===
+    "page-centralChat"
+  ){
+
+    renderCentralChat();
+
+  }
+
+  if(
+    active ===
+    "page-privateChat"
+  ){
+
+    renderPrivateChat();
+
+  }
+
+  if(
+    active ===
+    "page-files"
+  ){
+
+    renderFiles();
+
+  }
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+  $("statAccounts")
+    .textContent =
+    ACCOUNTS.length;
+
+
+  $("statMissions")
+    .textContent =
+
+      readLocal(
+        KEYS.missions
+      )
+      .filter(
+        visibleSectorData
+      )
+      .length;
+
+
+  $("statReports")
+    .textContent =
+
+      readLocal(
+        KEYS.reports
+      )
+      .filter(
+        visibleSectorData
+      )
+      .length;
+
+
+  renderCurrentAccount();
+
+}
+
+
+/* =========================================================
+   MISSIONS
+========================================================= */
+
+function renderMissions(){
+
+  $("missionActions")
+    .innerHTML =
+
+      isCongress()
+
+        ? `
+          <button
+            class="primary"
+            id="newMissionBtn"
+          >
+            + New Mission
+          </button>
+        `
+
+        : "";
+
+
+  if(isCongress()){
+
+    $("newMissionBtn")
+      .onclick =
+      () => missionModal();
+
+  }
+
+
+  const data =
+
+    readLocal(
+      KEYS.missions
+    )
+    .filter(
+      visibleSectorData
+    )
+    .sort(
+      (a,b) =>
+        (b.createdAt || 0) -
+        (a.createdAt || 0)
+    );
+
+
+  if(!data.length){
+
+    $("missionsList")
+      .innerHTML =
+      `
+        <div class="panel empty">
+          No missions available.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("missionsList")
+    .innerHTML =
+
+      data.map(
+        mission => `
+
+          <div class="list-item">
+
+            <strong>
+              ${escapeHTML(mission.title)}
+            </strong>
+
+            <small>
+              ${escapeHTML(mission.sector)}
+              ·
+              ${escapeHTML(mission.status || "Open")}
+              ·
+              ${timeText(mission.createdAt)}
+            </small>
+
+            <small>
+              ${escapeHTML(mission.details || "No details.")}
+            </small>
+
+            <div
+              class="actions"
+              style="margin-top:10px"
+            >
+
+              <button
+                class="secondary"
+                onclick="viewMission('${mission.id}')"
+              >
+                View
+              </button>
+
+              ${
+                isCongress() ||
+                mission.createdBy === currentUser.id
+
+                ?
+
+                `
+                  <button
+                    class="danger"
+                    onclick="deleteMission('${mission.id}')"
+                  >
+                    Delete
+                  </button>
+                `
+
+                : ""
+
+              }
+
+            </div>
+
+          </div>
+
+        `
+      ).join("");
+
+}
+
+
+function missionModal(
+  existing=null
+){
+
+  const mission =
+    existing || {};
+
+
+  openModal(
+
+    existing
+      ? "Edit Mission"
+      : "New Mission",
+
+    `
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>
+            Mission Title
+          </label>
+
+          <input
+            id="mTitle"
+            value="${escapeHTML(mission.title || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Sector
+          </label>
+
+          <select id="mSector">
+
+            ${
+              [
+                "Congress",
+                "CIA",
+                "FBI",
+                "LSPD",
+                "DOJ"
+              ]
+              .map(
+                sector => `
+
+                  <option
+                    ${
+                      sector ===
+                      (
+                        mission.sector ||
+                        currentUser.sector
+                      )
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    ${sector}
+                  </option>
+
+                `
+              ).join("")
+            }
+
+          </select>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Details
+          </label>
+
+          <textarea
+            id="mDetails"
+          >${escapeHTML(mission.details || "")}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Status
+          </label>
+
+          <select id="mStatus">
+
+            <option>
+              Open
+            </option>
+
+            <option
+              ${
+                mission.status === "Active"
+                  ? "selected"
+                  : ""
+              }
+            >
+              Active
+            </option>
+
+            <option
+              ${
+                mission.status === "Closed"
+                  ? "selected"
+                  : ""
+              }
+            >
+              Closed
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    `,
+
+    `
+
+      <button
+        class="ghost"
+        type="button"
+        onclick="closeModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary"
+        type="button"
+        id="saveMissionBtn"
+      >
+        Save
+      </button>
+
+    `
+
+  );
+
+
+  $("saveMissionBtn")
+    .onclick =
+    async () => {
+
+      const obj = {
+
+        title:
+          $("mTitle")
+            .value
+            .trim(),
+
+        sector:
+          $("mSector")
+            .value,
+
+        details:
+          $("mDetails")
+            .value
+            .trim(),
+
+        status:
+          $("mStatus")
+            .value
+
+      };
+
+
+      if(!obj.title){
+
+        toast(
+          "Mission title is required.",
+          "bad"
+        );
+
+        return;
+
+      }
+
+
+      if(existing){
+
+        obj.id =
+          existing.id;
+
+        obj.createdAt =
+          existing.createdAt;
+
+        obj.createdBy =
+          existing.createdBy;
+
+      }
+
+      else{
+
+        obj.id =
+          crypto.randomUUID();
+
+        obj.createdAt =
+          Date.now();
+
+        obj.createdBy =
+          currentUser.id;
+
+      }
+
+
+      const data =
+        readLocal(
+          KEYS.missions
+        );
+
+
+      const index =
+        data.findIndex(
+          item =>
+            item.id === obj.id
+        );
+
+
+      if(index >= 0){
+
+        data[index] =
+          obj;
+
+      }
+
+      else{
+
+        data.push(obj);
+
+      }
+
+
+      writeLocal(
+        KEYS.missions,
+        data
+      );
+
+
+      if(firebaseReady){
+
+        try{
+
+          await setDoc(
+
+            doc(
+              db,
+              "missions",
+              obj.id
+            ),
+
+            {
+              ...obj,
+              updatedAt:
+                serverTimestamp()
+            }
+
+          );
+
+        }
+
+        catch(error){
+
+          console.error(error);
+
+          toast(
+            "Saved locally; cloud sync will retry.",
+            "bad"
+          );
+
+        }
+
+      }
+
+
+      closeModal();
+
+      renderMissions();
+
+      renderDashboard();
+
+      toast(
+        "Mission saved.",
+        "good"
+      );
+
+    };
+
+}
+
+
+window.viewMission =
+  id => {
+
+    const mission =
+      readLocal(
+        KEYS.missions
+      )
+      .find(
+        item =>
+          item.id === id
+      );
+
+
+    if(!mission){
+
+      return;
+
+    }
+
+
+    openModal(
+
+      mission.title,
+
+      `
+
+        <div class="list">
+
+          <div class="list-item">
+
+            <strong>
+              Sector
+            </strong>
+
+            <small>
+              ${escapeHTML(mission.sector)}
+            </small>
+
+          </div>
+
+
+          <div class="list-item">
+
+            <strong>
+              Status
+            </strong>
+
+            <small>
+              ${escapeHTML(mission.status)}
+            </small>
+
+          </div>
+
+
+          <div class="list-item">
+
+            <strong>
+              Details
+            </strong>
+
+            <small>
+              ${escapeHTML(mission.details)}
+            </small>
+
+          </div>
+
+
+          <div class="list-item">
+
+            <strong>
+              Created
+            </strong>
+
+            <small>
+              ${timeText(mission.createdAt)}
+            </small>
+
+          </div>
+
+        </div>
+
+      `,
+
+      `
+
+        <button
+          class="primary"
+          type="button"
+          onclick="closeModal()"
+        >
+          Close
+        </button>
+
+      `
+
+    );
+
+  };
+
+
+window.deleteMission =
+  async id => {
+
+    if(
+      !confirm(
+        "Delete this mission?"
+      )
+    ){
+
+      return;
+
+    }
+
+
+    const data =
+      readLocal(
+        KEYS.missions
+      )
+      .filter(
+        item =>
+          item.id !== id
+      );
+
+
+    writeLocal(
+      KEYS.missions,
+      data
+    );
+
+
+    if(firebaseReady){
+
+      try{
+
+        await deleteDoc(
+          doc(
+            db,
+            "missions",
+            id
+          )
+        );
+
+      }
+
+      catch(error){}
+
+    }
+
+
+    renderMissions();
+
+    renderDashboard();
+
+    toast(
+      "Mission deleted.",
+      "good"
+    );
+
+  };
+
+
+/* =========================================================
+   REPORTS
+========================================================= */
+
+$("newReportBtn")
+  .onclick =
+  () => reportModal();
+
+
+function reportModal(
+  existing=null
+){
+
+  const report =
+    existing || {};
+
+
+  openModal(
+
+    existing
+      ? "Edit Report"
+      : "New Official Report",
+
+    `
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>
+            Report Title
+          </label>
+
+          <input
+            id="rTitle"
+            value="${escapeHTML(report.title || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Sector
+          </label>
+
+          <select id="rSector">
+
+            ${
+              [
+                "Congress",
+                "CIA",
+                "FBI",
+                "LSPD",
+                "DOJ"
+              ]
+              .map(
+                sector => `
+
+                  <option
+                    ${
+                      sector ===
+                      (
+                        report.sector ||
+                        currentUser.sector
+                      )
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    ${sector}
+                  </option>
+
+                `
+              ).join("")
+            }
+
+          </select>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Details
+          </label>
+
+          <textarea
+            id="rDetails"
+          >${escapeHTML(report.details || "")}</textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Participants
+          </label>
+
+          <input
+            id="rParticipants"
+            value="${escapeHTML(report.participants || "")}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Evidence links / file references
+          </label>
+
+          <textarea
+            id="rEvidence"
+          >${escapeHTML(report.evidence || "")}</textarea>
+
+        </div>
+
+      </div>
+
+    `,
+
+    `
+
+      <button
+        class="ghost"
+        type="button"
+        onclick="closeModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary"
+        type="button"
+        id="saveReportBtn"
+      >
+        Submit Report
+      </button>
+
+    `
+
+  );
+
+
+  $("saveReportBtn")
+    .onclick =
+    async () => {
+
+      const obj = {
+
+        title:
+          $("rTitle")
+            .value
+            .trim(),
+
+        sector:
+          $("rSector")
+            .value,
+
+        details:
+          $("rDetails")
+            .value
+            .trim(),
+
+        participants:
+          $("rParticipants")
+            .value
+            .trim(),
+
+        evidence:
+          $("rEvidence")
+            .value
+            .trim(),
+
+        reporter:
+          currentUser.name,
+
+        reporterRole:
+          currentUser.role,
+
+        status:
+          "Pending"
+
+      };
+
+
+      if(
+        !obj.title ||
+        !obj.details
+      ){
+
+        toast(
+          "Title and details are required.",
+          "bad"
+        );
+
+        return;
+
+      }
+
+
+      obj.id =
+        existing?.id ||
+        crypto.randomUUID();
+
+
+      obj.createdAt =
+        existing?.createdAt ||
+        Date.now();
+
+
+      const data =
+        readLocal(
+          KEYS.reports
+        );
+
+
+      const index =
+        data.findIndex(
+          item =>
+            item.id === obj.id
+        );
+
+
+      if(index >= 0){
+
+        data[index] =
+          obj;
+
+      }
+
+      else{
+
+        data.push(obj);
+
+      }
+
+
+      writeLocal(
+        KEYS.reports,
+        data
+      );
+
+
+      if(firebaseReady){
+
+        try{
+
+          await setDoc(
+
+            doc(
+              db,
+              "reports",
+              obj.id
+            ),
+
+            {
+              ...obj,
+              updatedAt:
+                serverTimestamp()
+            }
+
+          );
+
+        }
+
+        catch(error){}
+
+      }
+
+
+      closeModal();
+
+      renderReports();
+
+      renderDashboard();
+
+      toast(
+        "Report submitted.",
+        "good"
+      );
+
+    };
+
+}
+
+
+function renderReports(){
+
+  const data =
+
+    readLocal(
+      KEYS.reports
+    )
+    .filter(
+      visibleSectorData
+    )
+    .sort(
+      (a,b) =>
+        (b.createdAt || 0) -
+        (a.createdAt || 0)
+    );
+
+
+  if(!data.length){
+
+    $("reportsList")
+      .innerHTML =
+
+      `
+        <div class="panel empty">
+          No reports available.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("reportsList")
+    .innerHTML =
+
+      data.map(
+        report => `
+
+          <div class="list-item">
+
+            <strong>
+              ${escapeHTML(report.title)}
+            </strong>
+
+            <small>
+              ${escapeHTML(report.sector)}
+              ·
+              ${escapeHTML(report.reporter)}
+              ·
+              ${timeText(report.createdAt)}
+            </small>
+
+            <small>
+              ${escapeHTML(report.details)}
+            </small>
+
+
+            <div
+              class="actions"
+              style="margin-top:10px"
+            >
+
+              <button
+                class="secondary"
+                onclick="viewReport('${report.id}')"
+              >
+                View
+              </button>
+
+              ${
+                isCongress() ||
+                report.reporter === currentUser.name
+
+                ?
+
+                `
+                  <button
+                    class="danger"
+                    onclick="deleteReport('${report.id}')"
+                  >
+                    Delete
+                  </button>
+                `
+
+                : ""
+
+              }
+
+            </div>
+
+          </div>
+
+        `
+      ).join("");
+
+}
+
+
+window.viewReport =
+  id => {
+
+    const report =
+      readLocal(
+        KEYS.reports
+      )
+      .find(
+        item =>
+          item.id === id
+      );
+
+
+    if(!report){
+
+      return;
+
+    }
+
+
+    openModal(
+
+      report.title,
+
+      `
+
+        <div
+          style="
+            background:#fff;
+            color:#111;
+            padding:28px;
+            border-radius:8px
+          "
+        >
+
+          <div
+            style="
+              display:flex;
+              justify-content:space-between;
+              gap:20px
+            "
+          >
+
+            <div>
+
+              <h2 style="margin:0">
+                OFFICIAL REPORT
+              </h2>
+
+              <p>
+                ${escapeHTML(report.sector)}
+              </p>
+
+            </div>
+
+            <strong>
+              CONGRESS OF THEWAY TOWN
+            </strong>
+
+          </div>
+
+
+          <hr>
+
+
+          <p>
+            <b>
+              Report Title:
+            </b>
+
+            ${escapeHTML(report.title)}
+          </p>
+
+
+          <p>
+
+            <b>
+              Details:
+            </b>
+
+            <br>
+
+            ${escapeHTML(report.details)}
+
+          </p>
+
+
+          <p>
+
+            <b>
+              Participants:
+            </b>
+
+            ${escapeHTML(
+              report.participants || "—"
+            )}
+
+          </p>
+
+
+          <p>
+
+            <b>
+              Evidence:
+            </b>
+
+            <br>
+
+            ${escapeHTML(
+              report.evidence || "—"
+            )}
+
+          </p>
+
+
+          <p>
+
+            <b>
+              Reporter:
+            </b>
+
+            ${escapeHTML(report.reporter)}
+
+            —
+
+            ${escapeHTML(report.reporterRole)}
+
+          </p>
+
+
+          <p
+            style="
+              margin-top:40px
+            "
+          >
+
+            <b>
+              Signature:
+            </b>
+
+            ${escapeHTML(report.reporter)}
+
+            <br>
+
+            ${escapeHTML(report.reporterRole)}
+
+          </p>
+
+        </div>
+
+      `,
+
+      `
+
+        <button
+          class="primary"
+          type="button"
+          onclick="closeModal()"
+        >
+          Close
+        </button>
+
+      `
+
+    );
+
+  };
+
+
+window.deleteReport =
+  async id => {
+
+    if(
+      !confirm(
+        "Delete this report?"
+      )
+    ){
+
+      return;
+
+    }
+
+
+    writeLocal(
+
+      KEYS.reports,
+
+      readLocal(
+        KEYS.reports
+      )
+      .filter(
+        item =>
+          item.id !== id
+      )
+
+    );
+
+
+    if(firebaseReady){
+
+      try{
+
+        await deleteDoc(
+          doc(
+            db,
+            "reports",
+            id
+          )
+        );
+
+      }
+
+      catch(error){}
+
+    }
+
+
+    renderReports();
+
+    renderDashboard();
+
+    toast(
+      "Report deleted.",
+      "good"
+    );
+
+  };
+
+
+/* =========================================================
+   CENTRAL CHAT
+========================================================= */
+
+function renderCentralChat(){
+
+  const data =
+
+    readLocal(
+      KEYS.central
+    )
+    .sort(
+      (a,b) =>
+        (a.createdAt || 0) -
+        (b.createdAt || 0)
+    );
+
+
+  $("centralMessages")
+    .innerHTML =
+
+      data.length
+
+        ?
+
+        data.map(
+          message => `
+
+            <div
+              class="msg
+              ${
+                message.senderId === currentUser.id
+                  ? "me"
+                  : ""
+              }"
+            >
+
+              <div class="meta">
+
+                ${escapeHTML(message.sender)}
+
+                ·
+
+                ${timeText(
+                  message.createdAt
+                )}
+
+              </div>
+
+
+              <div class="body">
+
+                ${escapeHTML(message.text)}
+
+              </div>
+
+            </div>
+
+          `
+        ).join("")
+
+        :
+
+        `
+          <div class="empty">
+            No messages yet.
+          </div>
+        `;
+
+
+  $("centralMessages")
+    .scrollTop =
+    $("centralMessages")
+      .scrollHeight;
+
+}
+
+
+$("centralChatForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const input =
+        $("centralChatInput");
+
+
+      const text =
+        input.value.trim();
+
+
+      if(!text){
+
+        return;
+
+      }
+
+
+      if(!firebaseReady){
+
+        toast(
+          "Connecting to cloud — Please wait a moment and send again.",
+          "bad"
+        );
+
+        return;
+
+      }
+
+
+      const message = {
+
+        id:
+          crypto.randomUUID(),
+
+        text:
+
+          text,
+
+        sender:
+          currentUser.name,
+
+        senderId:
+          currentUser.id,
+
+        sector:
+          currentUser.sector,
+
+        createdAt:
+          Date.now()
+
+      };
+
+
+      try{
+
+        await addDoc(
+
+          collection(
+            db,
+            "centralChat"
+          ),
+
+          {
+            ...message,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+
+        );
+
+
+        input.value = "";
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+        toast(
+          "Message could not be sent. Please try again.",
+          "bad"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   PRIVATE CHAT
+========================================================= */
+
+function roomId(
+  first,
+  second
+){
+
+  return [
+
+    first.id,
+    second.id
+
+  ]
+  .sort()
+  .join("_");
+
+}
+
+
+function renderPrivateContacts(){
+
+  const others =
+    ACCOUNTS.filter(
+      account =>
+        account.id !== currentUser.id
+    );
+
+
+  $("privateContacts")
+    .innerHTML =
+
+      others.map(
+        account => `
+
+          <div
+            class="
+              contact
+              ${
+                selectedPrivateUser?.id ===
+                account.id
+                  ? "active"
+                  : ""
+              }
+            "
+            data-id="${account.id}"
+          >
+
+            <strong>
+              ${escapeHTML(account.short)}
+            </strong>
+
+            <small>
+              ${escapeHTML(account.name)}
+            </small>
+
+          </div>
+
+        `
+      ).join("");
+
+
+  $("privateContacts")
+    .querySelectorAll(".contact")
+    .forEach(
+      element => {
+
+        element.onclick =
+          () => {
+
+            selectedPrivateUser =
+              ACCOUNTS.find(
+                account =>
+                  account.id ===
+                  element.dataset.id
+              );
+
+            subscribePrivate();
+
+            renderPrivateChat();
+
+          };
+
+      }
+    );
+
+}
+
+
+function renderPrivateChat(){
+
+  renderPrivateContacts();
+
+
+  if(!selectedPrivateUser){
+
+    $("privateMessages")
+      .innerHTML =
+
+      `
+        <div class="empty">
+          Select an official to start a private conversation.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  const id =
+    roomId(
+      currentUser,
+      selectedPrivateUser
+    );
+
+
+  const messages =
+
+    readLocal(
+      KEYS.private
+    )
+    .filter(
+      message =>
+        message.roomId === id
+    )
+    .sort(
+      (a,b) =>
+        (a.createdAt || 0) -
+        (b.createdAt || 0)
+    );
+
+
+  $("privateMessages")
+    .innerHTML =
+
+      messages.length
+
+        ?
+
+        messages.map(
+          message => `
+
+            <div
+              class="
+                msg
+                ${
+                  message.senderId === currentUser.id
+                    ? "me"
+                    : ""
+                }
+              "
+            >
+
+              <div class="meta">
+
+                ${escapeHTML(message.sender)}
+
+                ·
+
+                ${timeText(
+                  message.createdAt
+                )}
+
+              </div>
+
+
+              <div class="body">
+
+                ${escapeHTML(message.text)}
+
+              </div>
+
+            </div>
+
+          `
+        ).join("")
+
+        :
+
+        `
+          <div class="empty">
+            No private messages yet.
+          </div>
+        `;
+
+
+  $("privateMessages")
+    .scrollTop =
+    $("privateMessages")
+      .scrollHeight;
+
+}
+
+
+$("privateChatForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      if(!selectedPrivateUser){
+
+        toast(
+          "Select an official first.",
+          "bad"
+        );
+
+        return;
+
+      }
+
+
+      const input =
+        $("privateChatInput");
+
+
+      const text =
+        input.value.trim();
+
+
+      if(!text){
+
+        return;
+
+      }
+
+
+      if(!firebaseReady){
+
+        toast(
+          "Connecting to cloud — Please wait a moment and send again.",
+          "bad"
+        );
+
+        return;
+
+      }
+
+
+      const rid =
+        roomId(
+          currentUser,
+          selectedPrivateUser
+        );
+
+
+      try{
+
+        await addDoc(
+
+          collection(
+            db,
+            "privateChats",
+            rid,
+            "messages"
+          ),
+
+          {
+
+            text:
+
+              text,
+
+            sender:
+              currentUser.name,
+
+            senderId:
+              currentUser.id,
+
+            fromSector:
+              currentUser.sector,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+
+        );
+
+
+        input.value = "";
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+        toast(
+          "Private message could not be sent. Please try again.",
+          "bad"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   FILES
+========================================================= */
+
+$("uploadFileBtn")
+  .onclick =
+  () =>
+    $("fileInput").click();
+
+
+$("fileInput")
+  .addEventListener(
+    "change",
+    async event => {
+
+      const file =
+        event.target.files[0];
+
+
+      if(!file){
+
+        return;
+
+      }
+
+
+      if(!firebaseReady){
+
+        toast(
+          "Connecting to cloud — Please wait a moment and try again.",
+          "bad"
+        );
+
+        event.target.value = "";
+
+        return;
+
+      }
+
+
+      try{
+
+        const safeName =
+          file.name.replace(
+            /[^\w.\- ]/g,
+            "_"
+          );
+
+
+        const path =
+          `files/${currentUser.id}/${Date.now()}_${safeName}`;
+
+
+        const storageRef =
+          ref(
+            storage,
+            path
+          );
+
+
+        await uploadBytes(
+          storageRef,
+          file
+        );
+
+
+        const url =
+          await getDownloadURL(
+            storageRef
+          );
+
+
+        const metadata = {
+
+          name:
+            file.name,
+
+          size:
+            file.size,
+
+          type:
+            file.type || "unknown",
+
+          url:
+
+            url,
+
+          path:
+
+            path,
+
+          uploadedBy:
+            currentUser.name,
+
+          sector:
+            currentUser.sector,
+
+          createdAt:
+            Date.now()
+
+        };
+
+
+        await addDoc(
+
+          collection(
+            db,
+            "files"
+          ),
+
+          {
+
+            ...metadata,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+
+        );
+
+
+        toast(
+          "File uploaded.",
+          "good"
+        );
+
+
+        event.target.value = "";
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+        toast(
+          "File upload failed. Check Firebase Storage rules.",
+          "bad"
+        );
+
+        event.target.value = "";
+
+      }
+
+    }
+  );
+
+
+function renderFiles(){
+
+  const data =
+
+    readLocal(
+      KEYS.files
+    )
+    .filter(
+      visibleSectorData
+    )
+    .sort(
+      (a,b) =>
+        (b.createdAt || 0) -
+        (a.createdAt || 0)
+    );
+
+
+  if(!data.length){
+
+    $("filesList")
+      .innerHTML =
+
+      `
+        <div class="panel empty">
+          No files available.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("filesList")
+    .innerHTML =
+
+      data.map(
+        file => `
+
+          <div class="file-item">
+
+            <div>
+
+              <strong>
+                ${escapeHTML(file.name)}
+              </strong>
+
+              <small>
+
+                ${escapeHTML(
+                  file.uploadedBy || "Unknown"
+                )}
+
+                ·
+
+                ${escapeHTML(
+                  file.sector || ""
+                )}
+
+                ·
+
+                ${timeText(
+                  file.createdAt
+                )}
+
+              </small>
+
+            </div>
+
+
+            <a
+              class="secondary"
+              style="text-decoration:none"
+              target="_blank"
+              rel="noopener"
+              href="${escapeHTML(file.url)}"
+            >
+              Open
+            </a>
+
+          </div>
+
+        `
+      ).join("");
+
+}
+
+
+/* =========================================================
+   FIREBASE INITIALIZATION
+========================================================= */
+
+async function initializeFirebase(){
+
+  if(firebaseReady){
+
+    return true;
+
+  }
+
+
+  if(firebaseInitPromise){
+
+    return firebaseInitPromise;
+
+  }
+
+
+  firebaseInitPromise =
+    (async () => {
+
+      try{
+
+        const [
+
+          appModule,
+
+          firestoreModule,
+
+          storageModule
+
+        ] = await Promise.all([
+
+          import(
+            "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js"
+          ),
+
+          import(
+            "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js"
+          ),
+
+          import(
+            "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js"
+          )
+
+        ]);
+
+
+        const app =
+          appModule.initializeApp(
+            firebaseConfig
+          );
+
+
+        db =
+          firestoreModule.getFirestore(
+            app
+          );
+
+
+        storage =
+          storageModule.getStorage(
+            app
+          );
+
+
+        collection =
+          firestoreModule.collection;
+
+        doc =
+          firestoreModule.doc;
+
+        addDoc =
+          firestoreModule.addDoc;
+
+        setDoc =
+          firestoreModule.setDoc;
+
+        updateDoc =
+          firestoreModule.updateDoc;
+
+        deleteDoc =
+          firestoreModule.deleteDoc;
+
+        query =
+          firestoreModule.query;
+
+        orderBy =
+          firestoreModule.orderBy;
+
+        onSnapshot =
+          firestoreModule.onSnapshot;
+
+        serverTimestamp =
+          firestoreModule.serverTimestamp;
+
+
+        ref =
+          storageModule.ref;
+
+        uploadBytes =
+          storageModule.uploadBytes;
+
+        getDownloadURL =
+          storageModule.getDownloadURL;
+
+
+        setCloudStatus(
+          true,
+          "Cloud connected"
+        );
+
+
+        startRealtimeListeners();
+
+
+        await syncFixedAccounts();
+
+
+        await registerOnline();
+
+
+        return true;
+
+      }
+
+      catch(error){
+
+        console.error(
+          "Firebase initialization failed:",
+          error
+        );
+
+
+        setCloudStatus(
+          false,
+          "Cloud offline"
+        );
+
+
+        firebaseInitPromise =
+          null;
+
+
+        setTimeout(
+          () => {
+
+            if(
+              currentUser &&
+              !firebaseReady
+            ){
+
+              initializeFirebase();
+
+            }
+
+          },
+          10000
+        );
+
+
+        return false;
+
+      }
+
+    })();
+
+
+  return firebaseInitPromise;
+
+}
+
+
+/* =========================================================
+   SYNC USERS
+========================================================= */
+
+async function syncFixedAccounts(){
+
+  if(!firebaseReady){
+
+    return;
+
+  }
+
+
+  for(
+    const account
+    of ACCOUNTS
+  ){
+
+    try{
+
+      await setDoc(
+
+        doc(
+          db,
+          "users",
+          account.id
+        ),
+
+        {
+
+          id:
+            account.id,
+
+          username:
+            account.username,
+
+          name:
+            account.name,
+
+          fullSector:
+            account.fullSector,
+
+          short:
+            account.short,
+
+          jurisdiction:
+            account.jurisdiction,
+
+          role:
+            account.role,
+
+          sector:
+            account.sector,
+
+          fullAccess:
+            account.fullAccess,
+
+          syncedAt:
+            serverTimestamp()
+
+        },
+
+        {
+          merge:true
+        }
+
+      );
+
+    }
+
+    catch(error){}
+
+  }
+
+}
+
+
+/* =========================================================
+   REALTIME LISTENERS
+========================================================= */
+
+function clearListeners(){
+
+  unsubscribe.forEach(
+    function(stop){
+
+      try{
+
+        stop();
+
+      }
+
+      catch(error){}
+
+    }
+  );
+
+  unsubscribe = [];
+
+}
+
+
+function startRealtimeListeners(){
+
+  clearListeners();
+
+
+  if(!firebaseReady){
+
+    return;
+
+  }
+
+
+  function bindCollection(
+    collectionName,
+    localKey,
+    filter=true
+  ){
+
+    try{
+
+      const q =
+        query(
+
+          collection(
+            db,
+            collectionName
+          ),
+
+          orderBy(
+            "createdAt",
+            "desc"
+          )
+
+        );
+
+
+      const stop =
+        onSnapshot(
+
+          q,
+
+          snapshot => {
+
+            let data =
+              snapshot.docs.map(
+                item => ({
+                  id:item.id,
+                  ...item.data()
+                })
+              );
+
+
+            if(filter){
+
+              data =
+                data.filter(
+                  visibleSectorData
+                );
+
+            }
+
+
+            writeLocal(
+              localKey,
+              data
+            );
+
+
+            renderCurrentPage();
+
+            renderDashboard();
+
+          },
+
+          error => {
+
+            console.warn(
+              collectionName,
+              error
+            );
+
+          }
+
+        );
+
+
+      unsubscribe.push(
+        stop
+      );
+
+    }
+
+    catch(error){
+
+      console.warn(error);
+
+    }
+
+  }
+
+
+  bindCollection(
+    "missions",
+    KEYS.missions,
+    true
+  );
+
+
+  bindCollection(
+    "reports",
+    KEYS.reports,
+    true
+  );
+
+
+  bindCollection(
+    "centralChat",
+    KEYS.central,
+    false
+  );
+
+
+  bindCollection(
+    "files",
+    KEYS.files,
+    true
+  );
+
+
+  try{
+
+    const presenceQuery =
+      query(
+        collection(
+          db,
+          "presence"
+        )
+      );
+
+
+    unsubscribe.push(
+
+      onSnapshot(
+
+        presenceQuery,
+
+        snapshot => {
+
+          const online =
+            snapshot.docs.filter(
+              docSnapshot =>
+                docSnapshot.data()
+                  ?.online === true
+            ).length;
+
+
+          $("statOnline")
+            .textContent =
+            online;
+
+        },
+
+        () => {}
+
+      )
+
+    );
+
+  }
+
+  catch(error){}
+
+
+  subscribePrivate();
+
+}
+
+
+/* =========================================================
+   PRIVATE REALTIME
+========================================================= */
+
+function subscribePrivate(){
+
+  if(
+    !firebaseReady ||
+    !currentUser ||
+    !selectedPrivateUser
+  ){
+
+    return;
+
+  }
+
+
+  const rid =
+    roomId(
+      currentUser,
+      selectedPrivateUser
+    );
+
+
+  try{
+
+    const q =
+      query(
+
+        collection(
+          db,
+          "privateChats",
+          rid,
+          "messages"
+        ),
+
+        orderBy(
+          "createdAt",
+          "asc"
+        )
+
+      );
+
+
+    const stop =
+      onSnapshot(
+
+        q,
+
+        snapshot => {
+
+          const messages =
+            snapshot.docs.map(
+              item => ({
+
+                id:
+                  item.id,
+
+                roomId:
+                  rid,
+
+                ...item.data()
+
+              })
+            );
+
+
+          const others =
+            readLocal(
+              KEYS.private
+            )
+            .filter(
+              item =>
+                item.roomId !== rid
+            );
+
+
+          writeLocal(
+
+            KEYS.private,
+
+            [
+              ...others,
+              ...messages
+            ]
+
+          );
+
+
+          renderPrivateChat();
+
+        },
+
+        () => {}
+
+      );
+
+
+    unsubscribe.push(
+      stop
+    );
+
+  }
+
+  catch(error){
+
+    console.warn(error);
+
+  }
+
+}
+
+
+/* =========================================================
+   PRESENCE
+========================================================= */
+
+async function registerOnline(){
+
+  if(
+    !firebaseReady ||
+    !currentUser
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await setDoc(
+
+      doc(
+        db,
+        "presence",
+        currentUser.id
+      ),
+
+      {
+
+        accountId:
+          currentUser.id,
+
+        name:
+          currentUser.name,
+
+        sector:
+          currentUser.sector,
+
+        online:
+          true,
+
+        lastSeen:
+          serverTimestamp()
+
+      },
+
+      {
+        merge:true
+      }
+
+    );
+
+
+    clearInterval(
+      heartbeatTimer
+    );
+
+
+    heartbeatTimer =
+      setInterval(
+
+        async () => {
+
+          if(
+            firebaseReady &&
+            currentUser
+          ){
+
+            try{
+
+              await updateDoc(
+
+                doc(
+                  db,
+                  "presence",
+                  currentUser.id
+                ),
+
+                {
+
+                  online:
+                    true,
+
+                  lastSeen:
+                    serverTimestamp()
+
+                }
+
+              );
+
+            }
+
+            catch(error){}
+
+          }
+
+        },
+
+        30000
+
+      );
+
+  }
+
+  catch(error){}
+
+}
+
+
+async function registerOffline(){
+
+  clearInterval(
+    heartbeatTimer
+  );
+
+
+  if(
+    !firebaseReady ||
+    !currentUser
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await updateDoc(
+
+      doc(
+        db,
+        "presence",
+        currentUser.id
+      ),
+
+      {
+
+        online:
+          false,
+
+        lastSeen:
+          serverTimestamp()
+
+      }
+
+    );
+
+  }
+
+  catch(error){}
+
+}
+
+
+/* =========================================================
+   APPLICATION INITIALIZATION
+========================================================= */
+
+async function initializeApplication(){
+
+  renderCurrentPage();
+
+  initializeFirebase();
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(){
+
+  const username =
+    $("loginUsername")
+      .value
+      .trim();
+
+
+  const password =
+    $("loginPassword")
+      .value;
+
+
+  $("loginError")
+    .classList.add(
+      "hidden"
+    );
+
+
+  const account =
+    ACCOUNTS.find(
+
+      item =>
+
+        item.username
+          .toLowerCase() ===
+        username.toLowerCase()
+
+        &&
+
+        item.password ===
+        password
+
+    );
+
+
+  if(!account){
+
+    $("loginError")
+      .textContent =
+      "Invalid username or password.";
+
+
+    $("loginError")
+      .classList.remove(
+        "hidden"
+      );
+
+
+    return;
+
+  }
+
+
+  currentUser =
+    account;
+
+
+  saveSession(
+    account
+  );
+
+
+  $("loginScreen")
+    .classList.add(
+      "hidden"
+    );
+
+
+  $("app")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  $("loginPassword")
+    .value = "";
+
+
+  setupUserUI();
+
+  renderCurrentPage();
+
+
+  initializeApplication();
+
+}
+
+
+/* =========================================================
+   LOGIN FORM
+   IMPORTANT:
+   THERE IS ONLY ONE LOGIN LISTENER
+========================================================= */
+
+$("loginForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+
+      const button =
+        $("loginButton");
+
+
+      button.disabled =
+        true;
+
+
+      try{
+
+        await login();
+
+      }
+
+      catch(error){
+
+        console.error(
+          "Login error:",
+          error
+        );
+
+
+        toast(
+          "Login could not be completed.",
+          "bad"
+        );
+
+      }
+
+      finally{
+
+        button.disabled =
+          false;
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+$("logoutButton")
+  .addEventListener(
+    "click",
+    async () => {
+
+      await registerOffline();
+
+
+      clearSession();
+
+
+      currentUser =
+        null;
+
+
+      clearListeners();
+
+
+      firebaseInitPromise =
+        null;
+
+
+      firebaseReady =
+        false;
+
+
+      $("app")
+        .classList.add(
+          "hidden"
+        );
+
+
+      $("loginScreen")
+        .classList.remove(
+          "hidden"
+        );
+
+
+      $("loginUsername")
+        .value = "";
+
+
+      $("loginPassword")
+        .value = "";
+
+
+      setCloudStatus(
+        false,
+        "Cloud connecting..."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   BEFORE UNLOAD
+========================================================= */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    registerOffline();
+
+  }
+);
+
+
+/* =========================================================
+   RESTORE SESSION
+========================================================= */
+
+(function restoreSession(){
+
+  const account =
+    getSavedAccount();
+
+
+  if(!account){
+
+    $("loginScreen")
+      .classList.remove(
+        "hidden"
+      );
+
+
+    $("app")
+      .classList.add(
+        "hidden"
+      );
+
+
+    return;
+
+  }
+
+
+  currentUser =
+    account;
+
+
+  $("loginScreen")
+    .classList.add(
+      "hidden"
+    );
+
+
+  $("app")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  setupUserUI();
+
+  renderCurrentPage();
+
+  initializeApplication();
+
+})();
+
+</script>
+
+</body>
+</html>
