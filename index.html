@@ -1,0 +1,3387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Congress of TheWay Town</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#080b10;
+    --panel:#10151d;
+    --panel2:#151b24;
+    --panel3:#1b222d;
+    --border:#28313e;
+    --text:#f2f5f8;
+    --muted:#8f9baa;
+    --accent:#d6b36a;
+    --accent2:#f0d99d;
+    --danger:#d95d5d;
+    --success:#54c987;
+    --blue:#5c9dff;
+    --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* LOGIN */
+
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(214,179,106,.12),transparent 35%),
+        linear-gradient(135deg,#06080c,#0d1118);
+}
+
+.login-card{
+    width:430px;
+    max-width:100%;
+    background:rgba(16,21,29,.97);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:35px;
+    box-shadow:var(--shadow);
+}
+
+.logo{
+    width:82px;
+    height:82px;
+    border:2px solid var(--accent);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+    font-weight:bold;
+    font-size:26px;
+    color:var(--accent);
+}
+
+.login-title{
+    text-align:center;
+    font-size:23px;
+    letter-spacing:1px;
+}
+
+.login-sub{
+    text-align:center;
+    color:var(--muted);
+    margin:8px 0 30px;
+    font-size:13px;
+}
+
+.field{
+    margin-bottom:16px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:7px;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    border:1px solid var(--border);
+    background:#0b0f15;
+    color:white;
+    border-radius:9px;
+    padding:12px;
+    outline:none;
+}
+
+.field textarea{
+    resize:vertical;
+    min-height:110px;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:var(--accent);
+}
+
+.primary-btn{
+    width:100%;
+    border:0;
+    border-radius:9px;
+    padding:13px;
+    background:var(--accent);
+    color:#15110a;
+    font-weight:bold;
+}
+
+.primary-btn:hover{
+    background:var(--accent2);
+}
+
+.login-error{
+    color:#ff7777;
+    font-size:13px;
+    text-align:center;
+    min-height:20px;
+    margin-top:12px;
+}
+
+/* APP */
+
+#app{
+    min-height:100vh;
+    display:flex;
+}
+
+.sidebar{
+    width:245px;
+    background:#0c1016;
+    border-right:1px solid var(--border);
+    padding:20px 14px;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    overflow-y:auto;
+}
+
+.brand{
+    padding:10px;
+    margin-bottom:25px;
+    border-bottom:1px solid var(--border);
+}
+
+.brand strong{
+    display:block;
+    font-size:15px;
+    color:var(--accent);
+}
+
+.brand span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+.nav-title{
+    color:#626d7b;
+    font-size:10px;
+    text-transform:uppercase;
+    margin:18px 10px 8px;
+    letter-spacing:1px;
+}
+
+.nav-btn{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#aeb7c2;
+    padding:11px 12px;
+    border-radius:8px;
+    text-align:left;
+    margin-bottom:3px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:#181e27;
+    color:white;
+}
+
+.nav-btn.active{
+    border-left:3px solid var(--accent);
+}
+
+.main{
+    margin-left:245px;
+    width:calc(100% - 245px);
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    border-bottom:1px solid var(--border);
+    background:rgba(8,11,16,.92);
+    backdrop-filter:blur(10px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.status-dot{
+    width:9px;
+    height:9px;
+    background:var(--success);
+    border-radius:50%;
+    box-shadow:0 0 10px var(--success);
+}
+
+.user-name{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.user-sector{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
+}
+
+.logout{
+    border:1px solid #4b2930;
+    background:#211216;
+    color:#ff8585;
+    padding:8px 14px;
+    border-radius:7px;
+}
+
+.content{
+    padding:28px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-head{
+    margin-bottom:25px;
+}
+
+.page-head h1{
+    font-size:25px;
+}
+
+.page-head p{
+    color:var(--muted);
+    margin-top:6px;
+    font-size:13px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.stat-value{
+    font-size:28px;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.section-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+}
+
+.section-card h3{
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.empty{
+    color:var(--muted);
+    text-align:center;
+    padding:30px 10px;
+    font-size:13px;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    font-size:12px;
+}
+
+th{
+    color:var(--muted);
+    font-size:10px;
+    text-transform:uppercase;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:10px;
+    background:#202733;
+    color:#bfc7d2;
+}
+
+.badge.green{
+    background:#10271d;
+    color:#63d99a;
+}
+
+.badge.red{
+    background:#2a1518;
+    color:#ff8585;
+}
+
+.badge.gold{
+    background:#292216;
+    color:var(--accent2);
+}
+
+.action-btn{
+    border:1px solid var(--border);
+    background:#171d26;
+    color:#dce2e8;
+    border-radius:6px;
+    padding:6px 9px;
+    margin:2px;
+    font-size:11px;
+}
+
+.action-btn:hover{
+    border-color:var(--accent);
+}
+
+.action-danger{
+    color:#ff8181;
+}
+
+/* FORMS */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.form-actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+    margin-top:15px;
+}
+
+.small-btn{
+    border:0;
+    border-radius:7px;
+    padding:9px 14px;
+    background:var(--accent);
+    color:#17120a;
+    font-weight:bold;
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:9px 14px;
+    background:#151b23;
+    color:white;
+}
+
+/* CHAT */
+
+.chat-box{
+    height:500px;
+    display:flex;
+    flex-direction:column;
+}
+
+.messages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    background:#0b0f15;
+    border:1px solid var(--border);
+    border-radius:10px;
+}
+
+.message{
+    margin-bottom:12px;
+    max-width:75%;
+}
+
+.message.mine{
+    margin-left:auto;
+}
+
+.message-head{
+    font-size:10px;
+    color:var(--muted);
+    margin-bottom:4px;
+}
+
+.message-body{
+    background:#171e28;
+    padding:10px;
+    border-radius:8px;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.mine .message-body{
+    background:#302919;
+}
+
+.chat-input{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.chat-input input{
+    flex:1;
+    border:1px solid var(--border);
+    background:#0b0f15;
+    color:white;
+    border-radius:8px;
+    padding:11px;
+}
+
+.chat-input button{
+    border:0;
+    background:var(--accent);
+    padding:0 20px;
+    border-radius:8px;
+}
+
+/* SECTORS */
+
+.sector-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.sector-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+}
+
+.sector-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.sector-short{
+    color:var(--accent);
+    font-size:11px;
+    margin-top:5px;
+}
+
+.sector-location{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:12px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+}
+
+.modal-card{
+    width:650px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:transparent;
+    color:#aaa;
+    font-size:24px;
+}
+
+/* FILE */
+
+.file-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-bottom:8px;
+}
+
+.file-name{
+    font-size:12px;
+}
+
+.file-meta{
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* TOAST */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:200;
+    background:#171d25;
+    border:1px solid var(--border);
+    padding:13px 17px;
+    border-radius:9px;
+    box-shadow:var(--shadow);
+    display:none;
+    max-width:350px;
+    font-size:12px;
+}
+
+#toast.show{
+    display:block;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+    display:none;
+    border:1px solid var(--border);
+    background:#151b23;
+    color:white;
+    padding:8px 10px;
+    border-radius:7px;
+}
+
+@media(max-width:1000px){
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid,
+    .sector-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:750px){
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+        z-index:50;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 14px;
+    }
+
+    .content{
+        padding:16px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+}
+
+@media(max-width:480px){
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .login-card{
+        padding:25px 18px;
+    }
+
+    .user-sector{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<section id="loginScreen">
+
+<div class="login-card">
+
+<div class="logo">CTW</div>
+
+<div class="login-title">CONGRESS OF THEWAY TOWN</div>
+
+<div class="login-sub">
+Central Government Management System
+</div>
+
+<form id="loginForm">
+
+<div class="field">
+<label>USERNAME</label>
+<input id="loginUsername" autocomplete="username" required>
+</div>
+
+<div class="field">
+<label>PASSWORD</label>
+<input id="loginPassword" type="password" autocomplete="current-password" required>
+</div>
+
+<button class="primary-btn" type="submit">
+SIGN IN
+</button>
+
+<div id="loginError" class="login-error"></div>
+
+</form>
+
+</div>
+</section>
+
+
+<!-- APPLICATION -->
+
+<div id="app" class="hidden">
+
+<aside class="sidebar" id="sidebar">
+
+<div class="brand">
+<strong>CONGRESS OF THEWAY TOWN</strong>
+<span>Central Government Management System</span>
+</div>
+
+<div class="nav-title">Main</div>
+
+<button class="nav-btn active" data-page="dashboard">
+⌂ Dashboard
+</button>
+
+<button class="nav-btn" data-page="missions">
+◆ Missions
+</button>
+
+<button class="nav-btn" data-page="reports">
+▣ Reports
+</button>
+
+<button class="nav-btn" data-page="centralChat">
+◉ Central Chat
+</button>
+
+<button class="nav-btn" data-page="privateChat">
+◎ Private Communication
+</button>
+
+<button class="nav-btn" data-page="files">
+▤ Files
+</button>
+
+<div class="nav-title">Organization</div>
+
+<button class="nav-btn" data-page="sectors">
+▦ Sectors
+</button>
+
+<button class="nav-btn congress-only" data-page="users">
+♙ Accounts
+</button>
+
+<button class="nav-btn congress-only" data-page="settings">
+⚙ System Control
+</button>
+
+</aside>
+
+
+<main class="main">
+
+<header class="topbar">
+
+<button class="mobile-menu" id="mobileMenu">☰</button>
+
+<div class="user-info">
+
+<div class="status-dot"></div>
+
+<div>
+<div class="user-name" id="topUserName"></div>
+<div class="user-sector" id="topUserSector"></div>
+</div>
+
+</div>
+
+<button class="logout" id="logoutBtn">
+LOG OUT
+</button>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- DASHBOARD -->
+
+<section class="page active" id="page-dashboard">
+
+<div class="page-head">
+<h1>Government Dashboard</h1>
+<p>Central overview of TheWay Town government operations.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="stat-label">Accounts</div>
+<div class="stat-value" id="statUsers">0</div>
+</div>
+
+<div class="card">
+<div class="stat-label">Missions</div>
+<div class="stat-value" id="statMissions">0</div>
+</div>
+
+<div class="card">
+<div class="stat-label">Reports</div>
+<div class="stat-value" id="statReports">0</div>
+</div>
+
+<div class="card">
+<div class="stat-label">Online Officials</div>
+<div class="stat-value" id="statOnline">0</div>
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="section-card">
+<h3>Current Authority</h3>
+
+<div id="currentAuthority"></div>
+</div>
+
+<div class="section-card">
+<h3>Recent Activity</h3>
+
+<div id="recentActivity"></div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MISSIONS -->
+
+<section class="page" id="page-missions">
+
+<div class="page-head">
+<h1>Missions</h1>
+<p>Government mission management for TheWay Town.</p>
+</div>
+
+<div class="section-card">
+
+<div class="form-actions" id="missionCreateArea">
+<button class="small-btn" id="newMissionBtn">
++ New Mission
+</button>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Title</th>
+<th>From</th>
+<th>To</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="missionsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section class="page" id="page-reports">
+
+<div class="page-head">
+<h1>Reports</h1>
+<p>Official reports and government documentation.</p>
+</div>
+
+<div class="section-card">
+
+<div class="form-actions">
+<button class="small-btn" id="newReportBtn">
++ Create Report
+</button>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Title</th>
+<th>Sector</th>
+<th>Author</th>
+<th>Status</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="reportsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CENTRAL CHAT -->
+
+<section class="page" id="page-centralChat">
+
+<div class="page-head">
+<h1>Congress Central Chat</h1>
+<p>Central communication between Congress and all authorized sectors.</p>
+</div>
+
+<div class="section-card">
+
+<div class="chat-box">
+
+<div class="messages" id="centralMessages"></div>
+
+<div class="chat-input">
+<input id="centralInput" placeholder="Write a message...">
+<button id="centralSend">SEND</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRIVATE CHAT -->
+
+<section class="page" id="page-privateChat">
+
+<div class="page-head">
+<h1>Private Communication</h1>
+<p>Private communication with authorized officials.</p>
+</div>
+
+<div class="grid">
+
+<div class="section-card">
+
+<h3>Select Official</h3>
+
+<div class="field">
+<select id="privateUserSelect"></select>
+</div>
+
+</div>
+
+<div class="section-card">
+
+<h3>Private Messages</h3>
+
+<div class="chat-box">
+
+<div class="messages" id="privateMessages">
+<div class="empty">Select an official to start communication.</div>
+</div>
+
+<div class="chat-input">
+<input id="privateInput" placeholder="Private message...">
+<button id="privateSend">SEND</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FILES -->
+
+<section class="page" id="page-files">
+
+<div class="page-head">
+<h1>Government Files</h1>
+<p>Official documents and evidence stored by the government system.</p>
+</div>
+
+<div class="section-card">
+
+<div class="form-actions">
+<input type="file" id="fileInput">
+<button class="small-btn" id="uploadFileBtn">UPLOAD</button>
+</div>
+
+<br>
+
+<div id="filesList"></div>
+
+</div>
+
+</section>
+
+
+<!-- SECTORS -->
+
+<section class="page" id="page-sectors">
+
+<div class="page-head">
+<h1>Government Sectors</h1>
+<p>Authorized agencies operating under TheWay Town.</p>
+</div>
+
+<div class="sector-grid" id="sectorGrid"></div>
+
+</section>
+
+
+<!-- USERS -->
+
+<section class="page" id="page-users">
+
+<div class="page-head">
+<h1>Account Management</h1>
+<p>Congress Commander control panel.</p>
+</div>
+
+<div class="section-card">
+
+<div class="form-actions">
+<button class="small-btn" id="editAccountBtn">
+Edit Selected Account
+</button>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Username</th>
+<th>Official Name</th>
+<th>Sector</th>
+<th>Jurisdiction</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="usersTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section class="page" id="page-settings">
+
+<div class="page-head">
+<h1>System Control</h1>
+<p>Congress of TheWay Town administrative controls.</p>
+</div>
+
+<div class="grid">
+
+<div class="section-card">
+<h3>System Identity</h3>
+
+<p style="color:#aaa;font-size:13px;line-height:1.8">
+<strong>System:</strong> Congress of TheWay Town<br>
+<strong>Jurisdiction:</strong> TheWay Town<br>
+<strong>Authority:</strong> Congress Commander<br>
+<strong>Storage:</strong> Firebase Cloud Storage<br>
+<strong>Database:</strong> Firebase Firestore
+</p>
+
+</div>
+
+<div class="section-card">
+<h3>Access Structure</h3>
+
+<p style="color:#aaa;font-size:13px;line-height:1.8">
+Congress Commander — Full Access<br>
+Central Intelligence Agency — Agency Access<br>
+Federal Bureau of Investigation — Agency Access<br>
+Los Santos Police Department — Department Access<br>
+Department of Justice — Department Access
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+</main>
+</div>
+
+
+<!-- MODAL -->
+
+<div id="modal" class="modal hidden">
+
+<div class="modal-card">
+
+<div class="modal-head">
+<h2 id="modalTitle">Window</h2>
+<button class="close" id="closeModal">×</button>
+</div>
+
+<div id="modalBody"></div>
+
+</div>
+</div>
+
+
+<div id="toast"></div>
+
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+doc,
+addDoc,
+setDoc,
+updateDoc,
+deleteDoc,
+getDoc,
+getDocs,
+query,
+orderBy,
+onSnapshot,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+
+
+const firebaseConfig = {
+apiKey:"AIzaSyBK4EKEzR5bJJC46Fm58fxBX8baOOZD3CA",
+authDomain:"congress-system.firebaseapp.com",
+projectId:"congress-system",
+storageBucket:"congress-system.firebasestorage.app",
+messagingSenderId:"563738636945",
+appId:"1:563738636945:web:380cba764be03f63e58530"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const storage = getStorage(firebaseApp);
+
+
+/* =========================================================
+   FIXED RP ACCOUNTS
+========================================================= */
+
+const ACCOUNTS = [
+
+{
+id:"congress",
+username:"congress",
+password:"CTW#4829!",
+name:"Congress Commander",
+fullSector:"Congress of TheWay Town",
+short:"CONGRESS",
+jurisdiction:"TheWay Town",
+role:"Congress Commander",
+sector:"Congress",
+fullAccess:true
+},
+
+{
+id:"cia",
+username:"cia",
+password:"CIA#7316@",
+name:"Central Intelligence Agency",
+fullSector:"Central Intelligence Agency",
+short:"CIA",
+jurisdiction:"TheWay Town",
+role:"Agency Director",
+sector:"CIA",
+fullAccess:false
+},
+
+{
+id:"fbi",
+username:"fbi",
+password:"FBI#5942$",
+name:"Federal Bureau of Investigation",
+fullSector:"Federal Bureau of Investigation",
+short:"FBI",
+jurisdiction:"TheWay Town",
+role:"Special Agent",
+sector:"FBI",
+fullAccess:false
+},
+
+{
+id:"lspd",
+username:"lspd",
+password:"LSPD#8265!",
+name:"Los Santos Police Department",
+fullSector:"Los Santos Police Department",
+short:"LSPD",
+jurisdiction:"TheWay Town",
+role:"Police Commander",
+sector:"LSPD",
+fullAccess:false
+},
+
+{
+id:"doj",
+username:"doj",
+password:"DOJ#3174@",
+name:"Department of Justice",
+fullSector:"Department of Justice",
+short:"DOJ",
+jurisdiction:"TheWay Town",
+role:"Justice Official",
+sector:"DOJ",
+fullAccess:false
+}
+
+];
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser = null;
+let listeners = [];
+let selectedPrivateUser = null;
+let allUsers = [];
+let allMissions = [];
+let allReports = [];
+let allFiles = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value){
+    if(value === null || value === undefined) return "";
+    return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function toast(message){
+    const el = $("toast");
+    el.textContent = message;
+    el.classList.add("show");
+
+    setTimeout(()=>{
+        el.classList.remove("show");
+    },3000);
+}
+
+function isCongress(){
+    return currentUser && currentUser.sector === "Congress";
+}
+
+function canManageEverything(){
+    return currentUser && currentUser.fullAccess === true;
+}
+
+function visibleSectorData(item){
+
+    if(isCongress()) return true;
+
+    return item.sector === currentUser.sector ||
+           item.toSector === currentUser.sector ||
+           item.fromSector === currentUser.sector;
+}
+
+function formatDate(value){
+
+    if(!value) return "—";
+
+    try{
+
+        const date =
+        value.toDate
+        ? value.toDate()
+        : new Date(value);
+
+        return date.toLocaleString();
+
+    }catch{
+        return "—";
+    }
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+$("loginForm").addEventListener("submit",async e=>{
+
+    e.preventDefault();
+
+    const username =
+    $("loginUsername").value.trim().toLowerCase();
+
+    const password =
+    $("loginPassword").value;
+
+    const account =
+    ACCOUNTS.find(
+        a =>
+        a.username === username &&
+        a.password === password
+    );
+
+    if(!account){
+
+        $("loginError").textContent =
+        "Invalid username or password.";
+
+        return;
+    }
+
+    currentUser = {
+        ...account
+    };
+
+    localStorage.setItem(
+        "ctw_session",
+        account.id
+    );
+
+    $("loginError").textContent="";
+
+    await registerOnline();
+
+    showApplication();
+
+});
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+async function restoreSession(){
+
+    const id =
+    localStorage.getItem("ctw_session");
+
+    if(!id) return;
+
+    const account =
+    ACCOUNTS.find(a=>a.id===id);
+
+    if(!account){
+
+        localStorage.removeItem("ctw_session");
+
+        return;
+    }
+
+    currentUser = {...account};
+
+    await registerOnline();
+
+    showApplication();
+}
+
+
+$("logoutBtn").addEventListener("click",async()=>{
+
+    await setOffline();
+
+    localStorage.removeItem("ctw_session");
+
+    currentUser=null;
+
+    location.reload();
+
+});
+
+
+/* =========================================================
+   ONLINE STATUS
+========================================================= */
+
+async function registerOnline(){
+
+    if(!currentUser) return;
+
+    try{
+
+        await setDoc(
+            doc(db,"presence",currentUser.id),
+            {
+                username:currentUser.username,
+                name:currentUser.name,
+                sector:currentUser.sector,
+                jurisdiction:"TheWay Town",
+                online:true,
+                lastSeen:serverTimestamp()
+            },
+            {merge:true}
+        );
+
+    }catch(err){
+
+        console.error("Presence error:",err);
+
+    }
+}
+
+async function setOffline(){
+
+    if(!currentUser) return;
+
+    try{
+
+        await setDoc(
+            doc(db,"presence",currentUser.id),
+            {
+                online:false,
+                lastSeen:serverTimestamp()
+            },
+            {merge:true}
+        );
+
+    }catch{}
+}
+
+window.addEventListener("beforeunload",()=>{
+
+    if(!currentUser) return;
+
+    setDoc(
+        doc(db,"presence",currentUser.id),
+        {
+            online:false,
+            lastSeen:serverTimestamp()
+        },
+        {merge:true}
+    );
+
+});
+
+
+setInterval(()=>{
+
+    if(currentUser){
+
+        setDoc(
+            doc(db,"presence",currentUser.id),
+            {
+                online:true,
+                lastSeen:serverTimestamp()
+            },
+            {merge:true}
+        ).catch(()=>{});
+
+    }
+
+},30000);
+
+
+/* =========================================================
+   APPLICATION
+========================================================= */
+
+function showApplication(){
+
+    $("loginScreen").classList.add("hidden");
+    $("app").classList.remove("hidden");
+
+    $("topUserName").textContent =
+    currentUser.name;
+
+    $("topUserSector").textContent =
+    `${currentUser.fullSector} • ${currentUser.jurisdiction}`;
+
+    document
+    .querySelectorAll(".congress-only")
+    .forEach(btn=>{
+
+        btn.classList.toggle(
+            "hidden",
+            !isCongress()
+        );
+
+    });
+
+    buildSectors();
+    loadEverything();
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document
+.querySelectorAll(".nav-btn")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const page =
+        button.dataset.page;
+
+        if(
+            button.classList.contains("congress-only") &&
+            !isCongress()
+        ){
+            toast("Congress Commander access required.");
+            return;
+        }
+
+        document
+        .querySelectorAll(".nav-btn")
+        .forEach(b=>b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        document
+        .querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+        $("page-"+page)
+        .classList.add("active");
+
+        $("sidebar").classList.remove("open");
+
+    });
+
+});
+
+
+$("mobileMenu").addEventListener("click",()=>{
+
+    $("sidebar").classList.toggle("open");
+
+});
+
+
+/* =========================================================
+   FIRESTORE LISTENERS
+========================================================= */
+
+function clearListeners(){
+
+    listeners.forEach(unsubscribe=>{
+
+        try{
+            unsubscribe();
+        }catch{}
+
+    });
+
+    listeners=[];
+}
+
+
+function loadEverything(){
+
+    clearListeners();
+
+    listenUsers();
+    listenMissions();
+    listenReports();
+    listenFiles();
+    listenCentralChat();
+    listenPresence();
+
+}
+
+
+/* =========================================================
+   USERS / PRESENCE
+========================================================= */
+
+function listenUsers(){
+
+    const unsub =
+    onSnapshot(
+        collection(db,"users"),
+        snapshot=>{
+
+            allUsers =
+            snapshot.docs.map(d=>({
+                id:d.id,
+                ...d.data()
+            }));
+
+            renderUsers();
+            updateStats();
+            renderPrivateUsers();
+
+        },
+        err=>console.error(err)
+    );
+
+    listeners.push(unsub);
+}
+
+
+function listenPresence(){
+
+    onSnapshot(
+        collection(db,"presence"),
+        snapshot=>{
+
+            const online =
+            snapshot.docs.filter(
+                d=>d.data().online===true
+            ).length;
+
+            $("statOnline").textContent=online;
+
+            renderUsers();
+
+        }
+    );
+
+}
+
+
+async function syncFixedAccounts(){
+
+    for(const account of ACCOUNTS){
+
+        try{
+
+            await setDoc(
+                doc(db,"users",account.id),
+                {
+                    username:account.username,
+                    name:account.name,
+                    fullSector:account.fullSector,
+                    short:account.short,
+                    sector:account.sector,
+                    role:account.role,
+                    jurisdiction:"TheWay Town",
+                    enabled:true,
+                    fixed:true,
+                    updatedAt:serverTimestamp()
+                },
+                {merge:true}
+            );
+
+        }catch(err){
+
+            console.error(err);
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function updateStats(){
+
+    $("statUsers").textContent =
+    ACCOUNTS.length;
+
+    $("statMissions").textContent =
+    allMissions.filter(visibleSectorData).length;
+
+    $("statReports").textContent =
+    allReports.filter(
+        r =>
+        isCongress() ||
+        r.sector===currentUser.sector
+    ).length;
+
+    $("currentAuthority").innerHTML=`
+
+    <p style="line-height:2;color:#aaa;font-size:13px">
+    <strong style="color:white">Official:</strong>
+    ${escapeHTML(currentUser.name)}<br>
+
+    <strong style="color:white">Authority:</strong>
+    ${escapeHTML(currentUser.role)}<br>
+
+    <strong style="color:white">Sector:</strong>
+    ${escapeHTML(currentUser.fullSector)}<br>
+
+    <strong style="color:white">Jurisdiction:</strong>
+    TheWay Town
+    </p>
+
+    `;
+
+    renderRecentActivity();
+
+}
+
+
+function renderRecentActivity(){
+
+    const container =
+    $("recentActivity");
+
+    const activities=[];
+
+    allMissions
+    .filter(visibleSectorData)
+    .slice(-4)
+    .forEach(m=>{
+
+        activities.push(
+            `Mission: ${escapeHTML(m.title)}`
+        );
+
+    });
+
+    allReports
+    .filter(
+        r =>
+        isCongress() ||
+        r.sector===currentUser.sector
+    )
+    .slice(-4)
+    .forEach(r=>{
+
+        activities.push(
+            `Report: ${escapeHTML(r.title)}`
+        );
+
+    });
+
+    if(!activities.length){
+
+        container.innerHTML=
+        `<div class="empty">No recent activity.</div>`;
+
+        return;
+    }
+
+    container.innerHTML =
+    activities
+    .slice(-8)
+    .reverse()
+    .map(
+        x=>`
+        <div style="
+        padding:9px 0;
+        border-bottom:1px solid var(--border);
+        color:#aaa;
+        font-size:12px">
+        ${x}
+        </div>
+        `
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   MISSIONS
+========================================================= */
+
+function listenMissions(){
+
+    const unsub =
+    onSnapshot(
+        collection(db,"missions"),
+        snapshot=>{
+
+            allMissions =
+            snapshot.docs.map(d=>({
+                id:d.id,
+                ...d.data()
+            }));
+
+            renderMissions();
+            updateStats();
+
+        }
+    );
+
+    listeners.push(unsub);
+}
+
+
+function renderMissions(){
+
+    const body =
+    $("missionsTable");
+
+    const data =
+    allMissions
+    .filter(visibleSectorData)
+    .sort((a,b)=>{
+
+        const ad =
+        a.createdAt?.seconds || 0;
+
+        const bd =
+        b.createdAt?.seconds || 0;
+
+        return bd-ad;
+
+    });
+
+    if(!data.length){
+
+        body.innerHTML=
+        `<tr><td colspan="7">
+        <div class="empty">No missions available.</div>
+        </td></tr>`;
+
+        return;
+    }
+
+    body.innerHTML =
+    data.map(m=>{
+
+        const canEdit =
+        isCongress() ||
+        m.createdBy===currentUser.id;
+
+        return `
+        <tr>
+
+        <td>${escapeHTML(m.title)}</td>
+
+        <td>
+        ${escapeHTML(m.fromSector || "Congress")}
+        </td>
+
+        <td>
+        ${escapeHTML(m.toSector || "—")}
+        </td>
+
+        <td>
+        <span class="badge gold">
+        ${escapeHTML(m.priority || "Normal")}
+        </span>
+        </td>
+
+        <td>
+        <span class="badge ${
+            m.status==="Completed"
+            ? "green"
+            : ""
+        }">
+        ${escapeHTML(m.status || "Pending")}
+        </span>
+        </td>
+
+        <td>
+        ${formatDate(m.createdAt)}
+        </td>
+
+        <td>
+
+        <button
+        class="action-btn"
+        onclick="viewMission('${m.id}')">
+        View
+        </button>
+
+        ${
+            canEdit
+            ?
+            `
+            <button
+            class="action-btn"
+            onclick="editMission('${m.id}')">
+            Edit
+            </button>
+
+            <button
+            class="action-btn action-danger"
+            onclick="deleteMission('${m.id}')">
+            Delete
+            </button>
+            `
+            :""
+        }
+
+        </td>
+
+        </tr>
+        `;
+
+    }).join("");
+
+}
+
+
+$("newMissionBtn").addEventListener(
+"click",
+()=>openMissionModal()
+);
+
+
+function openMissionModal(mission=null){
+
+    if(!isCongress() && mission){
+
+        if(mission.createdBy!==currentUser.id){
+
+            toast("You cannot edit this mission.");
+            return;
+
+        }
+
+    }
+
+    if(!isCongress() && !mission){
+
+        toast("Only Congress can issue new missions.");
+        return;
+
+    }
+
+    $("modalTitle").textContent =
+    mission ? "Edit Mission" : "New Government Mission";
+
+    const sectors =
+    ACCOUNTS
+    .filter(a=>a.sector!=="Congress");
+
+    $("modalBody").innerHTML=`
+
+    <form id="missionForm">
+
+    <div class="form-grid">
+
+    <div class="field">
+    <label>MISSION TITLE</label>
+    <input id="mTitle"
+    value="${escapeHTML(mission?.title || "")}"
+    required>
+    </div>
+
+    <div class="field">
+    <label>DESTINATION SECTOR</label>
+
+    <select id="mSector">
+
+    ${
+        sectors.map(s=>`
+        <option value="${s.sector}"
+        ${mission?.toSector===s.sector?"selected":""}>
+        ${s.fullSector}
+        </option>
+        `).join("")
+    }
+
+    </select>
+
+    </div>
+
+    <div class="field">
+    <label>PRIORITY</label>
+
+    <select id="mPriority">
+
+    ${
+        ["Low","Normal","High","Critical"]
+        .map(x=>`
+        <option
+        ${mission?.priority===x?"selected":""}>
+        ${x}
+        </option>
+        `).join("")
+    }
+
+    </select>
+
+    </div>
+
+    <div class="field">
+    <label>STATUS</label>
+
+    <select id="mStatus">
+
+    ${
+        ["Pending","Active","Completed","Cancelled"]
+        .map(x=>`
+        <option
+        ${mission?.status===x?"selected":""}>
+        ${x}
+        </option>
+        `).join("")
+    }
+
+    </select>
+
+    </div>
+
+    <div class="field full">
+
+    <label>MISSION DETAILS</label>
+
+    <textarea
+    id="mDetails"
+    required>${escapeHTML(mission?.details || "")}</textarea>
+
+    </div>
+
+    </div>
+
+    <div class="form-actions">
+
+    <button type="button"
+    class="secondary-btn"
+    id="cancelModal">
+    Cancel
+    </button>
+
+    <button class="small-btn">
+    Save Mission
+    </button>
+
+    </div>
+
+    </form>
+    `;
+
+    $("modal").classList.remove("hidden");
+
+    $("cancelModal").onclick=closeModal;
+
+    $("missionForm").onsubmit=
+    async e=>{
+
+        e.preventDefault();
+
+        const data={
+
+            title:$("mTitle").value.trim(),
+
+            toSector:$("mSector").value,
+
+            fromSector:
+            mission?.fromSector ||
+            currentUser.sector,
+
+            priority:$("mPriority").value,
+
+            status:$("mStatus").value,
+
+            details:$("mDetails").value.trim(),
+
+            createdBy:
+            mission?.createdBy ||
+            currentUser.id,
+
+            createdByName:
+            mission?.createdByName ||
+            currentUser.name,
+
+            sector:
+            mission?.sector ||
+            currentUser.sector,
+
+            updatedAt:serverTimestamp()
+
+        };
+
+        try{
+
+            if(mission){
+
+                await updateDoc(
+                    doc(db,"missions",mission.id),
+                    data
+                );
+
+                toast("Mission updated.");
+
+            }else{
+
+                await addDoc(
+                    collection(db,"missions"),
+                    {
+                        ...data,
+                        createdAt:serverTimestamp()
+                    }
+                );
+
+                toast("Mission created.");
+
+            }
+
+            closeModal();
+
+        }catch(err){
+
+            console.error(err);
+
+            toast("Unable to save mission.");
+
+        }
+
+    };
+
+}
+
+
+window.viewMission = function(id){
+
+    const m =
+    allMissions.find(x=>x.id===id);
+
+    if(!m) return;
+
+    $("modalTitle").textContent =
+    "Mission Details";
+
+    $("modalBody").innerHTML=`
+
+    <div style="line-height:2;font-size:13px">
+
+    <strong>Title:</strong>
+    ${escapeHTML(m.title)}
+    <br>
+
+    <strong>From:</strong>
+    ${escapeHTML(m.fromSector)}
+    <br>
+
+    <strong>To:</strong>
+    ${escapeHTML(m.toSector)}
+    <br>
+
+    <strong>Priority:</strong>
+    ${escapeHTML(m.priority)}
+    <br>
+
+    <strong>Status:</strong>
+    ${escapeHTML(m.status)}
+    <br>
+
+    <strong>Created By:</strong>
+    ${escapeHTML(m.createdByName)}
+    <br>
+
+    <strong>Details:</strong>
+
+    <div style="
+    margin-top:10px;
+    background:#0b0f15;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:15px;
+    white-space:pre-wrap;
+    color:#aaa">
+    ${escapeHTML(m.details)}
+    </div>
+
+    </div>
+
+    `;
+
+    $("modal").classList.remove("hidden");
+
+};
+
+
+window.editMission = function(id){
+
+    const m =
+    allMissions.find(x=>x.id===id);
+
+    if(m) openMissionModal(m);
+
+};
+
+
+window.deleteMission = async function(id){
+
+    const m =
+    allMissions.find(x=>x.id===id);
+
+    if(!m) return;
+
+    if(
+        !isCongress() &&
+        m.createdBy!==currentUser.id
+    ){
+
+        toast("You cannot delete this mission.");
+        return;
+
+    }
+
+    if(!confirm("Delete this mission?")) return;
+
+    try{
+
+        await deleteDoc(
+            doc(db,"missions",id)
+        );
+
+        toast("Mission deleted.");
+
+    }catch{
+
+        toast("Unable to delete mission.");
+
+    }
+
+};
+
+
+/* =========================================================
+   REPORTS
+========================================================= */
+
+function listenReports(){
+
+    const unsub =
+    onSnapshot(
+        collection(db,"reports"),
+        snapshot=>{
+
+            allReports =
+            snapshot.docs.map(d=>({
+                id:d.id,
+                ...d.data()
+            }));
+
+            renderReports();
+            updateStats();
+
+        }
+    );
+
+    listeners.push(unsub);
+}
+
+
+function renderReports(){
+
+    const body =
+    $("reportsTable");
+
+    const data =
+    allReports
+    .filter(
+        r =>
+        isCongress() ||
+        r.sector===currentUser.sector
+    )
+    .sort((a,b)=>{
+
+        const ad=a.createdAt?.seconds||0;
+        const bd=b.createdAt?.seconds||0;
+
+        return bd-ad;
+
+    });
+
+    if(!data.length){
+
+        body.innerHTML=
+        `<tr>
+        <td colspan="6">
+        <div class="empty">No reports available.</div>
+        </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    body.innerHTML =
+    data.map(r=>{
+
+        return `
+        <tr>
+
+        <td>${escapeHTML(r.title)}</td>
+
+        <td>${escapeHTML(r.sector)}</td>
+
+        <td>${escapeHTML(r.authorName)}</td>
+
+        <td>
+        <span class="badge ${
+        r.status==="Accepted"
+        ? "green"
+        : r.status==="Rejected"
+        ? "red"
+        : ""
+        }">
+        ${escapeHTML(r.status || "Pending")}
+        </span>
+        </td>
+
+        <td>${formatDate(r.createdAt)}</td>
+
+        <td>
+
+        <button
+        class="action-btn"
+        onclick="viewReport('${r.id}')">
+        View
+        </button>
+
+        ${
+            isCongress()
+            ?
+            `
+            <button
+            class="action-btn"
+            onclick="setReportStatus('${r.id}','Accepted')">
+            Accept
+            </button>
+
+            <button
+            class="action-btn action-danger"
+            onclick="setReportStatus('${r.id}','Rejected')">
+            Reject
+            </button>
+            `
+            :""
+        }
+
+        </td>
+
+        </tr>
+        `;
+
+    }).join("");
+
+}
+
+
+$("newReportBtn").addEventListener(
+"click",
+()=>openReportModal()
+);
+
+
+function openReportModal(){
+
+    $("modalTitle").textContent =
+    "Create Official Report";
+
+    $("modalBody").innerHTML=`
+
+    <form id="reportForm">
+
+    <div class="form-grid">
+
+    <div class="field full">
+
+    <label>REPORT TITLE</label>
+
+    <input id="rTitle" required>
+
+    </div>
+
+    <div class="field full">
+
+    <label>REPORT DETAILS</label>
+
+    <textarea id="rDetails" required></textarea>
+
+    </div>
+
+    <div class="field full">
+
+    <label>PARTICIPANTS</label>
+
+    <input
+    id="rParticipants"
+    placeholder="Names of participating officials">
+
+    </div>
+
+    </div>
+
+    <div class="form-actions">
+
+    <button
+    type="button"
+    class="secondary-btn"
+    id="cancelReport">
+    Cancel
+    </button>
+
+    <button class="small-btn">
+    Submit Report
+    </button>
+
+    </div>
+
+    </form>
+    `;
+
+    $("modal").classList.remove("hidden");
+
+    $("cancelReport").onclick=closeModal;
+
+    $("reportForm").onsubmit=
+    async e=>{
+
+        e.preventDefault();
+
+        try{
+
+            await addDoc(
+                collection(db,"reports"),
+                {
+                    title:$("rTitle").value.trim(),
+
+                    details:$("rDetails").value.trim(),
+
+                    participants:
+                    $("rParticipants").value.trim(),
+
+                    sector:currentUser.sector,
+
+                    authorId:currentUser.id,
+
+                    authorName:currentUser.name,
+
+                    authorRole:currentUser.role,
+
+                    jurisdiction:"TheWay Town",
+
+                    status:"Pending",
+
+                    createdAt:serverTimestamp()
+                }
+            );
+
+            toast("Report submitted.");
+
+            closeModal();
+
+        }catch(err){
+
+            console.error(err);
+
+            toast("Unable to submit report.");
+
+        }
+
+    };
+
+}
+
+
+window.viewReport=function(id){
+
+    const r =
+    allReports.find(x=>x.id===id);
+
+    if(!r) return;
+
+    $("modalTitle").textContent =
+    "Official Report";
+
+    $("modalBody").innerHTML=`
+
+    <div style="line-height:2;font-size:13px">
+
+    <strong>Title:</strong>
+    ${escapeHTML(r.title)}
+    <br>
+
+    <strong>Sector:</strong>
+    ${escapeHTML(r.sector)}
+    <br>
+
+    <strong>Author:</strong>
+    ${escapeHTML(r.authorName)}
+    <br>
+
+    <strong>Rank:</strong>
+    ${escapeHTML(r.authorRole)}
+    <br>
+
+    <strong>Participants:</strong>
+    ${escapeHTML(r.participants || "None")}
+    <br>
+
+    <strong>Status:</strong>
+    ${escapeHTML(r.status)}
+    <br><br>
+
+    <strong>Details</strong>
+
+    <div style="
+    margin-top:8px;
+    padding:15px;
+    border:1px solid var(--border);
+    background:#0b0f15;
+    border-radius:8px;
+    white-space:pre-wrap;
+    color:#aaa">
+    ${escapeHTML(r.details)}
+    </div>
+
+    <br>
+
+    <strong>Signature:</strong>
+    ${escapeHTML(r.authorName)} — ${escapeHTML(r.authorRole)}
+
+    </div>
+
+    `;
+
+    $("modal").classList.remove("hidden");
+
+};
+
+
+window.setReportStatus=
+async function(id,status){
+
+    if(!isCongress()){
+
+        toast("Congress access required.");
+        return;
+
+    }
+
+    try{
+
+        await updateDoc(
+            doc(db,"reports",id),
+            {
+                status,
+                reviewedBy:currentUser.name,
+                reviewedAt:serverTimestamp()
+            }
+        );
+
+        toast(`Report ${status.toLowerCase()}.`);
+
+    }catch{
+
+        toast("Unable to update report.");
+
+    }
+
+};
+
+
+/* =========================================================
+   CENTRAL CHAT
+========================================================= */
+
+function listenCentralChat(){
+
+    const q =
+    query(
+        collection(db,"centralMessages"),
+        orderBy("createdAt","asc")
+    );
+
+    const unsub =
+    onSnapshot(
+        q,
+        snapshot=>{
+
+            const messages =
+            snapshot.docs.map(d=>({
+                id:d.id,
+                ...d.data()
+            }));
+
+            renderMessages(
+                $("centralMessages"),
+                messages
+            );
+
+        },
+        err=>{
+
+            console.error(err);
+
+        }
+    );
+
+    listeners.push(unsub);
+
+}
+
+
+function renderMessages(container,messages){
+
+    if(!messages.length){
+
+        container.innerHTML=
+        `<div class="empty">
+        No messages yet.
+        </div>`;
+
+        return;
+
+    }
+
+    container.innerHTML =
+    messages.map(m=>{
+
+        const mine =
+        m.senderId===currentUser.id;
+
+        return `
+
+        <div class="message ${mine?"mine":""}">
+
+        <div class="message-head">
+
+        ${escapeHTML(m.senderName)}
+        •
+        ${escapeHTML(m.senderSector)}
+        •
+        ${formatDate(m.createdAt)}
+
+        </div>
+
+        <div class="message-body">
+        ${escapeHTML(m.text)}
+        </div>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+    container.scrollTop =
+    container.scrollHeight;
+
+}
+
+
+$("centralSend").addEventListener(
+"click",
+sendCentralMessage
+);
+
+
+$("centralInput").addEventListener(
+"keydown",
+e=>{
+
+    if(e.key==="Enter"){
+
+        e.preventDefault();
+
+        sendCentralMessage();
+
+    }
+
+});
+
+
+async function sendCentralMessage(){
+
+    const input =
+    $("centralInput");
+
+    const text =
+    input.value.trim();
+
+    if(!text) return;
+
+    try{
+
+        await addDoc(
+            collection(db,"centralMessages"),
+            {
+                text,
+                senderId:currentUser.id,
+                senderName:currentUser.name,
+                senderSector:currentUser.fullSector,
+                jurisdiction:"TheWay Town",
+                createdAt:serverTimestamp()
+            }
+        );
+
+        input.value="";
+
+    }catch{
+
+        toast("Unable to send message.");
+
+    }
+
+}
+
+
+/* =========================================================
+   PRIVATE CHAT
+========================================================= */
+
+function renderPrivateUsers(){
+
+    const select =
+    $("privateUserSelect");
+
+    const users =
+    ACCOUNTS.filter(
+        a=>a.id!==currentUser.id
+    );
+
+    select.innerHTML =
+    `<option value="">Select official...</option>`+
+    users.map(u=>`
+
+    <option value="${u.id}">
+    ${u.name} — ${u.role}
+    </option>
+
+    `).join("");
+
+}
+
+
+$("privateUserSelect").addEventListener(
+"change",
+()=>{
+
+    selectedPrivateUser =
+    $("privateUserSelect").value;
+
+    listenPrivateChat();
+
+});
+
+
+function privateRoomId(a,b){
+
+    return [a,b].sort().join("_");
+
+}
+
+
+function listenPrivateChat(){
+
+    if(!selectedPrivateUser){
+
+        $("privateMessages").innerHTML=
+        `<div class="empty">
+        Select an official to start communication.
+        </div>`;
+
+        return;
+
+    }
+
+    const room =
+    privateRoomId(
+        currentUser.id,
+        selectedPrivateUser
+    );
+
+    const q =
+    query(
+        collection(
+            db,
+            "privateChats",
+            room,
+            "messages"
+        ),
+        orderBy("createdAt","asc")
+    );
+
+    const unsub =
+    onSnapshot(
+        q,
+        snapshot=>{
+
+            const messages =
+            snapshot.docs.map(d=>d.data());
+
+            renderMessages(
+                $("privateMessages"),
+                messages
+            );
+
+        }
+    );
+
+    listeners.push(unsub);
+
+}
+
+
+$("privateSend").addEventListener(
+"click",
+sendPrivateMessage
+);
+
+
+$("privateInput").addEventListener(
+"keydown",
+e=>{
+
+    if(e.key==="Enter"){
+
+        e.preventDefault();
+
+        sendPrivateMessage();
+
+    }
+
+});
+
+
+async function sendPrivateMessage(){
+
+    if(!selectedPrivateUser){
+
+        toast("Select an official first.");
+        return;
+
+    }
+
+    const input =
+    $("privateInput");
+
+    const text =
+    input.value.trim();
+
+    if(!text) return;
+
+    const room =
+    privateRoomId(
+        currentUser.id,
+        selectedPrivateUser
+    );
+
+    try{
+
+        await addDoc(
+            collection(
+                db,
+                "privateChats",
+                room,
+                "messages"
+            ),
+            {
+                text,
+                senderId:currentUser.id,
+                senderName:currentUser.name,
+                senderSector:currentUser.fullSector,
+                createdAt:serverTimestamp()
+            }
+        );
+
+        input.value="";
+
+    }catch{
+
+        toast("Unable to send private message.");
+
+    }
+
+}
+
+
+/* =========================================================
+   FILES
+========================================================= */
+
+function listenFiles(){
+
+    const unsub =
+    onSnapshot(
+        collection(db,"files"),
+        snapshot=>{
+
+            allFiles =
+            snapshot.docs.map(d=>({
+                id:d.id,
+                ...d.data()
+            }));
+
+            renderFiles();
+
+        }
+    );
+
+    listeners.push(unsub);
+
+}
+
+
+function renderFiles(){
+
+    const container =
+    $("filesList");
+
+    const data =
+    allFiles.filter(
+        f =>
+        isCongress() ||
+        f.sector===currentUser.sector
+    );
+
+    if(!data.length){
+
+        container.innerHTML=
+        `<div class="empty">
+        No files available.
+        </div>`;
+
+        return;
+
+    }
+
+    container.innerHTML =
+    data.map(f=>`
+
+    <div class="file-row">
+
+    <div>
+
+    <div class="file-name">
+    ${escapeHTML(f.name)}
+    </div>
+
+    <div class="file-meta">
+    ${escapeHTML(f.sector)}
+    •
+    ${escapeHTML(f.uploadedByName)}
+    •
+    ${formatDate(f.createdAt)}
+    </div>
+
+    </div>
+
+    <a
+    href="${escapeHTML(f.url)}"
+    target="_blank"
+    class="action-btn"
+    style="text-decoration:none">
+    OPEN
+    </a>
+
+    </div>
+
+    `).join("");
+
+}
+
+
+$("uploadFileBtn").addEventListener(
+"click",
+async()=>{
+
+    const input =
+    $("fileInput");
+
+    const file =
+    input.files[0];
+
+    if(!file){
+
+        toast("Choose a file first.");
+        return;
+
+    }
+
+    try{
+
+        const path =
+        `uploads/${currentUser.sector}/${currentUser.id}/${Date.now()}_${file.name}`;
+
+        const storageRef =
+        ref(storage,path);
+
+        await uploadBytes(
+            storageRef,
+            file
+        );
+
+        const url =
+        await getDownloadURL(storageRef);
+
+        await addDoc(
+            collection(db,"files"),
+            {
+                name:file.name,
+                url,
+                path,
+                sector:currentUser.sector,
+                uploadedBy:currentUser.id,
+                uploadedByName:currentUser.name,
+                size:file.size,
+                type:file.type,
+                createdAt:serverTimestamp()
+            }
+        );
+
+        input.value="";
+
+        toast("File uploaded.");
+
+    }catch(err){
+
+        console.error(err);
+
+        toast("File upload failed.");
+
+    }
+
+});
+
+
+/* =========================================================
+   SECTORS
+========================================================= */
+
+function buildSectors(){
+
+    const sectors =
+    ACCOUNTS;
+
+    $("sectorGrid").innerHTML =
+    sectors.map(s=>`
+
+    <div class="sector-card">
+
+    <div class="sector-name">
+    ${escapeHTML(s.fullSector)}
+    </div>
+
+    <div class="sector-short">
+    ${escapeHTML(s.short)}
+    </div>
+
+    <div class="sector-location">
+    Jurisdiction: ${escapeHTML(s.jurisdiction)}
+    </div>
+
+    <div style="
+    margin-top:14px;
+    color:#aaa;
+    font-size:12px">
+    Position: ${escapeHTML(s.role)}
+    </div>
+
+    </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   ACCOUNT MANAGEMENT
+========================================================= */
+
+function renderUsers(){
+
+    if(!isCongress()) return;
+
+    const body =
+    $("usersTable");
+
+    const presence =
+    window.currentPresence || {};
+
+    body.innerHTML =
+    ACCOUNTS.map(a=>{
+
+        const online =
+        presence[a.id]===true;
+
+        return `
+
+        <tr>
+
+        <td>
+        ${escapeHTML(a.username)}
+        </td>
+
+        <td>
+        ${escapeHTML(a.name)}
+        </td>
+
+        <td>
+        ${escapeHTML(a.fullSector)}
+        </td>
+
+        <td>
+        TheWay Town
+        </td>
+
+        <td>
+
+        <span class="badge ${
+        online ? "green":"red"
+        }">
+
+        ${online ? "ONLINE":"OFFLINE"}
+
+        </span>
+
+        </td>
+
+        <td>
+
+        <button
+        class="action-btn"
+        onclick="editFixedAccount('${a.id}')">
+        Edit
+        </button>
+
+        </td>
+
+        </tr>
+
+        `;
+
+    }).join("");
+
+}
+
+
+window.currentPresence={};
+
+function refreshPresenceCache(){
+
+    onSnapshot(
+        collection(db,"presence"),
+        snapshot=>{
+
+            window.currentPresence={};
+
+            snapshot.docs.forEach(d=>{
+
+                window.currentPresence[d.id] =
+                d.data().online===true;
+
+            });
+
+            renderUsers();
+
+        }
+    );
+
+}
+
+
+window.editFixedAccount=function(id){
+
+    if(!isCongress()){
+
+        toast("Congress Commander access required.");
+        return;
+
+    }
+
+    const account =
+    ACCOUNTS.find(a=>a.id===id);
+
+    if(!account) return;
+
+    $("modalTitle").textContent =
+    "Account Information";
+
+    $("modalBody").innerHTML=`
+
+    <div style="line-height:2;font-size:13px">
+
+    <strong>Username:</strong>
+    ${escapeHTML(account.username)}
+    <br>
+
+    <strong>Official Name:</strong>
+    ${escapeHTML(account.name)}
+    <br>
+
+    <strong>Sector:</strong>
+    ${escapeHTML(account.fullSector)}
+    <br>
+
+    <strong>Role:</strong>
+    ${escapeHTML(account.role)}
+    <br>
+
+    <strong>Jurisdiction:</strong>
+    TheWay Town
+    <br><br>
+
+    <div style="
+    padding:12px;
+    border:1px solid #503a1b;
+    background:#211b10;
+    border-radius:8px;
+    color:#cdbb91;
+    font-size:11px">
+    Fixed account credentials are stored in this HTML file because this RP system does not use Firebase Authentication.
+    </div>
+
+    </div>
+
+    `;
+
+    $("modal").classList.remove("hidden");
+
+};
+
+
+$("editAccountBtn").addEventListener(
+"click",
+()=>{
+
+    if(!isCongress()){
+
+        toast("Congress Commander access required.");
+        return;
+
+    }
+
+    toast("Select an account from the table.");
+
+});
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(){
+
+    $("modal").classList.add("hidden");
+
+}
+
+$("closeModal").addEventListener(
+"click",
+closeModal
+);
+
+$("modal").addEventListener(
+"click",
+e=>{
+
+    if(e.target === $("modal")){
+
+        closeModal();
+
+    }
+
+});
+
+
+/* =========================================================
+   INITIAL FIRESTORE SETUP
+========================================================= */
+
+async function initializeSystem(){
+
+    try{
+
+        await syncFixedAccounts();
+
+    }catch(err){
+
+        console.error(err);
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+refreshPresenceCache();
+
+initializeSystem();
+
+restoreSession();
+
+</script>
+
+</body>
+</html>
